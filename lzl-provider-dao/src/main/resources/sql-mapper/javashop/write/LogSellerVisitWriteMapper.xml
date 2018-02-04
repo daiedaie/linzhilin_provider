@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.LogSellerVisitWriteDao">
+	
+	<insert id="post">
+		insert into log_seller_visit (member_id,seller_id,create_time )
+		values (#{memberId},#{sellerId},#{createTime})
+	</insert>
+
+    <update id="put">
+        update log_seller_visit
+        <set>
+				member_id = #{memberId},
+				seller_id = #{sellerId},
+				create_time = #{createTime},
+        </set>
+        where  
+    </update>
+
+</mapper>

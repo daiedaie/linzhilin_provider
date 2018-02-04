@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.ProductCommentsReadDao">
+
+	<sql id="Base_Column_List" >
+		id,user_id,user_name,pic,grade,content,product_id,product_goods_id,seller_id,reply_id,reply_name,reply_content,state,update_time,create_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.ProductComments">
+        select <include refid="Base_Column_List" />
+		from product_comments
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.ProductComments">
+        select <include refid="Base_Column_List" />
+		from product_comments
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from product_comments
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="userId != null and userId !=''">
+			and user_id = #{userId}
+			</if>
+			<if test="userName != null and userName !=''">
+			and user_name = #{userName}
+			</if>
+			<if test="pic != null and pic !=''">
+			and pic = #{pic}
+			</if>
+			<if test="grade != null and grade !=''">
+			and grade = #{grade}
+			</if>
+			<if test="content != null and content !=''">
+			and content = #{content}
+			</if>
+			<if test="productId != null and productId !=''">
+			and product_id = #{productId}
+			</if>
+			<if test="productGoodsId != null and productGoodsId !=''">
+			and product_goods_id = #{productGoodsId}
+			</if>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_id = #{sellerId}
+			</if>
+			<if test="replyId != null and replyId !=''">
+			and reply_id = #{replyId}
+			</if>
+			<if test="replyName != null and replyName !=''">
+			and reply_name = #{replyName}
+			</if>
+			<if test="replyContent != null and replyContent !=''">
+			and reply_content = #{replyContent}
+			</if>
+			<if test="state != null and state !=''">
+			and state = #{state}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

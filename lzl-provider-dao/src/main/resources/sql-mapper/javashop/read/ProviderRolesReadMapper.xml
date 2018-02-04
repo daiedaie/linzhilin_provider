@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.ProviderRolesReadDao">
+
+	<sql id="Base_Column_List" >
+		provider_roles_id,provider_id,provider_roles_name,provider_roles_code,content,status,create_user_id,create_time,update_user_id,update_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.ProviderRoles">
+        select <include refid="Base_Column_List"/>
+		from provider_roles
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from provider_roles
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="providerRolesId != null and providerRolesId !=''">
+			and provider_roles_id = #{providerRolesId}
+			</if>
+			<if test="providerId != null and providerId !=''">
+			and provider_id = #{providerId}
+			</if>
+			<if test="providerRolesName != null and providerRolesName !=''">
+			and provider_roles_name = #{providerRolesName}
+			</if>
+			<if test="providerRolesCode != null and providerRolesCode !=''">
+			and provider_roles_code = #{providerRolesCode}
+			</if>
+			<if test="content != null and content !=''">
+			and content = #{content}
+			</if>
+			<if test="status != null and status !=''">
+			and status = #{status}
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+			and create_user_id = #{createUserId}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="updateUserId != null and updateUserId !=''">
+			and update_user_id = #{updateUserId}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

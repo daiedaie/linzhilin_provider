@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.LogTransfersWriteDao">
+	
+	<insert id="post">
+		insert into log_transfers (transfers_id,seller_id,money_order,brokerage,money_real,create_time )
+		values (#{transfersId},#{sellerId},#{moneyOrder},#{brokerage},#{moneyReal},#{createTime})
+	</insert>
+
+    <update id="put">
+        update log_transfers
+        <set>
+				transfers_id = #{transfersId},
+				seller_id = #{sellerId},
+				money_order = #{moneyOrder},
+				brokerage = #{brokerage},
+				money_real = #{moneyReal},
+				create_time = #{createTime},
+        </set>
+        where transfers_id = #{transfersId} 
+    </update>
+
+</mapper>

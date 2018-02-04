@@ -4,6 +4,10 @@
     <groupId>com.lzl</groupId>
     <artifactId>linzhilin-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>lzl-provider-bean</artifactId>
+
+	<packaging>jar</packaging>	    
+	<artifactId>lzl-provider-bean</artifactId>
+
 </project>

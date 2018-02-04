@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.PartnerCityReadDao">
+
+	<sql id="Base_Column_List" >
+		pc_id,pc_city,pc_area,admin_id,create_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.PartnerCity">
+        select <include refid="Base_Column_List" />
+		from partner_city
+		where pc_id = #{pcId} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.PartnerCity">
+        select <include refid="Base_Column_List" />
+		from partner_city
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from partner_city
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="pcId != null and pcId !=''">
+			and pc_id = #{pcId}
+			</if>
+			<if test="pcCity != null and pcCity !=''">
+			and pc_city = #{pcCity}
+			</if>
+			<if test="pcArea != null and pcArea !=''">
+			and pc_area = #{pcArea}
+			</if>
+			<if test="adminId != null and adminId !=''">
+			and admin_id = #{adminId}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

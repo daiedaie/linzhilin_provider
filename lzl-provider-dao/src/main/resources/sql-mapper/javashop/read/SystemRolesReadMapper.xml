@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SystemRolesReadDao">
+
+	<sql id="Base_Column_List" >
+		id,roles_name,content,user_id,create_time,update_time,status,role_code 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.SystemRoles">
+        select <include refid="Base_Column_List" />
+		from system_roles
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.SystemRoles">
+        select <include refid="Base_Column_List" />
+		from system_roles
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from system_roles
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="rolesName != null and rolesName !=''">
+			and roles_name = #{rolesName}
+			</if>
+			<if test="content != null and content !=''">
+			and content = #{content}
+			</if>
+			<if test="userId != null and userId !=''">
+			and user_id = #{userId}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="status != null and status !=''">
+			and status = #{status}
+			</if>
+			<if test="roleCode != null and roleCode !=''">
+			and role_code = #{roleCode}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

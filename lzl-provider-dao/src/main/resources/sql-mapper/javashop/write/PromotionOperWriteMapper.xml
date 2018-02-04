@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.PromotionOperWriteDao">
+	
+	<insert id="post">
+		insert into promotion_oper (promotion_oper_id,promotion_id,type,user_type,user_id,oper_user_id,remark,create_time )
+		values (#{promotionOperId},#{promotionId},#{type},#{userType},#{userId},#{operUserId},#{remark},#{createTime})
+	</insert>
+
+    <update id="put">
+        update promotion_oper
+        <set>
+				promotion_oper_id = #{promotionOperId},
+				promotion_id = #{promotionId},
+				type = #{type},
+				user_type = #{userType},
+				user_id = #{userId},
+				oper_user_id = #{operUserId},
+				remark = #{remark},
+				create_time = #{createTime},
+        </set>
+        where promotion_oper_id = #{promotionOperId} 
+    </update>
+
+</mapper>

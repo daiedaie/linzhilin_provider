@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SellerRetrievePwdWriteDao">
+	
+	<insert id="post">
+		insert into seller_retrieve_pwd (id,name,silver_license_image,state,refuse_reason,audit_time,create_time,code )
+		values (#{id},#{name},#{silverLicenseImage},#{state},#{refuseReason},#{auditTime},#{createTime},#{code})
+	</insert>
+
+    <update id="put">
+        update seller_retrieve_pwd
+        <set>
+				id = #{id},
+				name = #{name},
+				silver_license_image = #{silverLicenseImage},
+				state = #{state},
+				refuse_reason = #{refuseReason},
+				audit_time = #{auditTime},
+				create_time = #{createTime},
+				code = #{code},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

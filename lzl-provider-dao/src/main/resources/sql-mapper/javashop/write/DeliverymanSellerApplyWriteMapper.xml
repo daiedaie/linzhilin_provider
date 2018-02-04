@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.DeliverymanSellerApplyWriteDao">
+	
+	<insert id="post">
+		insert into deliveryman_seller_apply (id,member_id,seller_id,apply_description,status,apply_time,check_time )
+		values (#{id},#{memberId},#{sellerId},#{applyDescription},#{status},#{applyTime},#{checkTime})
+	</insert>
+
+    <update id="put">
+        update deliveryman_seller_apply
+        <set>
+				id = #{id},
+				member_id = #{memberId},
+				seller_id = #{sellerId},
+				apply_description = #{applyDescription},
+				status = #{status},
+				apply_time = #{applyTime},
+				check_time = #{checkTime},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

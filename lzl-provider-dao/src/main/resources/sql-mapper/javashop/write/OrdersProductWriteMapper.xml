@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.OrdersProductWriteDao">
+	
+	<insert id="post">
+		insert into orders_product (id,orders_id,orders_sn,seller_id,supplier_id,pic,product_cate_id,product_brand_id,product_id,product_goods_id,spec_info,product_name,product_sku,package_groups_id,mall_groups_id,gift_id,is_gift,money_price,number,money_amount,money_act_single,act_single_id,activity_id,act_flash_sale_id,act_flash_sale_product_id,logistics_id,logistics_name,logistics_number,shipping_time,close_time,system_remark,member_product_back_id,member_product_exchange_id,status,create_time,update_time )
+		values (#{id},#{ordersId},#{ordersSn},#{sellerId},#{supplierId},#{pic},#{productCateId},#{productBrandId},#{productId},#{productGoodsId},#{specInfo},#{productName},#{productSku},#{packageGroupsId},#{mallGroupsId},#{giftId},#{isGift},#{moneyPrice},#{number},#{moneyAmount},#{moneyActSingle},#{actSingleId},#{activityId},#{actFlashSaleId},#{actFlashSaleProductId},#{logisticsId},#{logisticsName},#{logisticsNumber},#{shippingTime},#{closeTime},#{systemRemark},#{memberProductBackId},#{memberProductExchangeId},#{status},#{createTime},#{updateTime})
+	</insert>
+
+    <update id="put">
+        update orders_product
+        <set>
+				id = #{id},
+				orders_id = #{ordersId},
+				orders_sn = #{ordersSn},
+				seller_id = #{sellerId},
+				supplier_id = #{supplierId},
+				pic = #{pic},
+				product_cate_id = #{productCateId},
+				product_brand_id = #{productBrandId},
+				product_id = #{productId},
+				product_goods_id = #{productGoodsId},
+				spec_info = #{specInfo},
+				product_name = #{productName},
+				product_sku = #{productSku},
+				package_groups_id = #{packageGroupsId},
+				mall_groups_id = #{mallGroupsId},
+				gift_id = #{giftId},
+				is_gift = #{isGift},
+				money_price = #{moneyPrice},
+				number = #{number},
+				money_amount = #{moneyAmount},
+				money_act_single = #{moneyActSingle},
+				act_single_id = #{actSingleId},
+				activity_id = #{activityId},
+				act_flash_sale_id = #{actFlashSaleId},
+				act_flash_sale_product_id = #{actFlashSaleProductId},
+				logistics_id = #{logisticsId},
+				logistics_name = #{logisticsName},
+				logistics_number = #{logisticsNumber},
+				shipping_time = #{shippingTime},
+				close_time = #{closeTime},
+				system_remark = #{systemRemark},
+				member_product_back_id = #{memberProductBackId},
+				member_product_exchange_id = #{memberProductExchangeId},
+				status = #{status},
+				create_time = #{createTime},
+				update_time = #{updateTime},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

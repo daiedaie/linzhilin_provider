@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SellerWithdrawWriteDao">
+	
+	<insert id="post">
+		insert into seller_withdraw (withdraw_id,seller_id,withdraw_amount,rate,real_amount,bank_code,bank_more,err_message,status,create_time,accept_time,finish_time )
+		values (#{withdrawId},#{sellerId},#{withdrawAmount},#{rate},#{realAmount},#{bankCode},#{bankMore},#{errMessage},#{status},#{createTime},#{acceptTime},#{finishTime})
+	</insert>
+
+    <update id="put">
+        update seller_withdraw
+        <set>
+				withdraw_id = #{withdrawId},
+				seller_id = #{sellerId},
+				withdraw_amount = #{withdrawAmount},
+				rate = #{rate},
+				real_amount = #{realAmount},
+				bank_code = #{bankCode},
+				bank_more = #{bankMore},
+				err_message = #{errMessage},
+				status = #{status},
+				create_time = #{createTime},
+				accept_time = #{acceptTime},
+				finish_time = #{finishTime},
+        </set>
+        where withdraw_id = #{withdrawId} 
+    </update>
+
+</mapper>

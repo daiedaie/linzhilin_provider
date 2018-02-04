@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SmsReadDao">
+
+	<sql id="Base_Column_List" >
+		mobile,code,last_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.Sms">
+        select <include refid="Base_Column_List" />
+		from sms
+		where  
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Sms">
+        select <include refid="Base_Column_List" />
+		from sms
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from sms
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="mobile != null and mobile !=''">
+			and mobile = #{mobile}
+			</if>
+			<if test="code != null and code !=''">
+			and code = #{code}
+			</if>
+			<if test="lastTime != null and lastTime !=''">
+			and last_time = #{lastTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.GoodsWriteDao">
+	
+	<delete id="deleteGoodsById" parameterType="java.lang.Integer">
+		delete from goods
+		where goods_id = #{goodsId}
+	</delete>
+	
+	<insert id="post">
+		insert into goods (goods_id,full_name,short_name,detail,bar_code,goods_attribute_id,goods_type_id,measure_id,repository_id,provider_id,min_stock,max_stock,batch_manage,begin_date,invalid_date,create_time,modify_time )
+		values (#{goodsId},#{fullName},#{shortName},#{detail},#{barCode},#{goodsAttributeId},#{goodsTypeId},#{measureId},#{repositoryId},#{providerId},#{minStock},#{maxStock},#{batchManage},#{beginDate},#{invalidDate},#{createTime},#{modifyTime})
+	</insert>
+	
+	 <update id="put">
+        update goods
+        <set>
+				goods_id = #{goodsId},
+				full_name = #{fullName},
+				short_name = #{shortName},
+				detail = #{detail},
+				bar_code = #{barCode},
+				goods_attribute_id = #{goodsAttributeId},
+				goods_type_id = #{goodsTypeId},
+				measure_id = #{measureId},
+				repository_id = #{repositoryId},
+				provider_id = #{providerId},
+				min_stock = #{minStock},
+				max_stock = #{maxStock},
+				batch_manage = #{batchManage},
+				begin_date = #{beginDate},
+				invalid_date = #{invalidDate},
+				<!-- create_time = #{createTime}, -->
+				modify_time = #{modifyTime},
+				status = #{status},
+        </set>
+        where goods_id = #{goodsId} 
+    </update>
+
+</mapper>

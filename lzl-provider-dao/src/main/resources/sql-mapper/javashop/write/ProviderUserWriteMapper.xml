@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ejavashop.dao.shop.write.provider.ProviderUserWriteDao">
+	
+	<delete id="deleteProviderUserById" parameterType="java.lang.Integer">
+		delete from provider_user
+		where user_id = #{userId}
+	</delete>	
+	
+	<insert id="post">
+		insert into provider_user (user_id,username,password,pwd_confirm,code,real_name,phone,job,provider_id,provider_roles_id,state,create_admin_id,create_time,update_admin_id,update_time,modify_time )
+		values (#{userId},#{username},#{password},#{pwdConfirm},#{code},#{realName},#{phone},#{job},#{providerId},#{providerRolesId},#{state},#{createAdminId},#{createTime},#{updateAdminId},#{updateTime},#{modifyTime})
+	</insert>
+	
+	 <update id="put">
+        update provider_user
+        <set>
+				user_id = #{userId},
+				username = #{username},
+				password = #{password},
+				pwd_confirm = #{pwdConfirm},
+				code = #{code},
+				real_name = #{realName},
+				phone = #{phone},
+				job = #{job},
+				provider_id = #{providerId},
+				provider_roles_id = #{providerRolesId},
+				state = #{state},
+				create_admin_id = #{createAdminId},
+				create_time = #{createTime},
+				update_admin_id = #{updateAdminId},
+				update_time = #{updateTime},
+				modify_time = #{modifyTime},
+        </set>
+        where user_id = #{userId} 
+    </update>
+
+</mapper>

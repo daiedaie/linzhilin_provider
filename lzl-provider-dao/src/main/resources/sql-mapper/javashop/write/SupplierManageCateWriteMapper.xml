@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SupplierManageCateWriteDao">
+	
+	<insert id="post">
+		insert into supplier_manage_cate (id,supplier,create_id,create_time,product_cate_id,product_cate_name,state,opt_id,opt_time,stop_id,stop_time,stop_reason )
+		values (#{id},#{supplier},#{createId},#{createTime},#{productCateId},#{productCateName},#{state},#{optId},#{optTime},#{stopId},#{stopTime},#{stopReason})
+	</insert>
+
+    <update id="put">
+        update supplier_manage_cate
+        <set>
+				id = #{id},
+				supplier = #{supplier},
+				create_id = #{createId},
+				create_time = #{createTime},
+				product_cate_id = #{productCateId},
+				product_cate_name = #{productCateName},
+				state = #{state},
+				opt_id = #{optId},
+				opt_time = #{optTime},
+				stop_id = #{stopId},
+				stop_time = #{stopTime},
+				stop_reason = #{stopReason},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

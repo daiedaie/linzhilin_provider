@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SellerWechatReadDao">
+
+	<sql id="Base_Column_List" >
+		seller_id,union_id,open_id,num,wechat_logo,wechat_name,update_time,create_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.SellerWechat">
+        select <include refid="Base_Column_List" />
+		from seller_wechat
+		where seller_id = #{sellerId} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.SellerWechat">
+        select <include refid="Base_Column_List" />
+		from seller_wechat
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from seller_wechat
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_id = #{sellerId}
+			</if>
+			<if test="unionId != null and unionId !=''">
+			and union_id = #{unionId}
+			</if>
+			<if test="openId != null and openId !=''">
+			and open_id = #{openId}
+			</if>
+			<if test="num != null and num !=''">
+			and num = #{num}
+			</if>
+			<if test="wechatLogo != null and wechatLogo !=''">
+			and wechat_logo = #{wechatLogo}
+			</if>
+			<if test="wechatName != null and wechatName !=''">
+			and wechat_name = #{wechatName}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

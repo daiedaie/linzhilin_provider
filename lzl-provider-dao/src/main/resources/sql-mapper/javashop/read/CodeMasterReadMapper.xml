@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.CodeMasterReadDao">
+
+	<sql id="Base_Column_List" >
+		code_div,code_cd,code_text,sort_order,use_yn,create_user_id,create_user,create_time,update_user_id,update_user,update_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.CodeMaster">
+        select <include refid="Base_Column_List" />
+		from code_master
+		where code_div = #{codeDiv}code_cd = #{codeCd} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.CodeMaster">
+        select <include refid="Base_Column_List" />
+		from code_master
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from code_master
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="codeDiv != null and codeDiv !=''">
+			and code_div = #{codeDiv}
+			</if>
+			<if test="codeCd != null and codeCd !=''">
+			and code_cd = #{codeCd}
+			</if>
+			<if test="codeText != null and codeText !=''">
+			and code_text = #{codeText}
+			</if>
+			<if test="sortOrder != null and sortOrder !=''">
+			and sort_order = #{sortOrder}
+			</if>
+			<if test="useYn != null and useYn !=''">
+			and use_yn = #{useYn}
+			</if>
+			<if test="createUserId != null and createUserId !=''">
+			and create_user_id = #{createUserId}
+			</if>
+			<if test="createUser != null and createUser !=''">
+			and create_user = #{createUser}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="updateUserId != null and updateUserId !=''">
+			and update_user_id = #{updateUserId}
+			</if>
+			<if test="updateUser != null and updateUser !=''">
+			and update_user = #{updateUser}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

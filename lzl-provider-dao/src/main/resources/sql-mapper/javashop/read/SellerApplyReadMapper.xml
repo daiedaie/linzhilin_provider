@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SellerApplyReadDao">
+
+	<sql id="Base_Column_List" >
+		id,user_id,name,password,company,description,bussiness_license,tax_license,company_province,company_city,company_area,company_town,longitude,latitude,company_start_time,company_end_time,company_add,telephone,fax,bussiness_license_image,organization,bank_user,bank_name,bank_name_branch,brand_name_code,bank_code,bank_province,bank_city,bank_pic,legal_person,legal_person_card,idcard_pic,person_phone,email,state,type,opt_id,has_refrigerater,bond,invite_code,create_time,update_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.SellerApply">
+        select <include refid="Base_Column_List" />
+		from seller_apply
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.SellerApply">
+        select <include refid="Base_Column_List" />
+		from seller_apply
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from seller_apply
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="userId != null and userId !=''">
+			and user_id = #{userId}
+			</if>
+			<if test="name != null and name !=''">
+			and name = #{name}
+			</if>
+			<if test="password != null and password !=''">
+			and password = #{password}
+			</if>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_apply.user_id = (select seller.member_id from seller where seller.id=#{sellerId})
+			</if>
+			<if test="company != null and company !=''">
+			and company = #{company}
+			</if>
+			<if test="companyProvince != null and companyProvince !=''">
+			and company_province = #{companyProvince}
+			</if>
+			<if test="companyCity != null and companyCity !=''">
+			and company_city = #{companyCity}
+			</if>
+			<if test="companyArea != null and companyArea !=''">
+			and company_area = #{companyArea}
+			</if>
+			<if test="companyTown != null and companyTown !=''">
+			and company_town = #{companyTown}
+			</if>
+			<if test="longitude != null and longitude !=''">
+			and longitude = #{longitude}
+			</if>
+			<if test="latitude != null and latitude !=''">
+			and latitude = #{latitude}
+			</if>
+			<if test="companyAdd != null and companyAdd !=''">
+			and company_add = #{companyAdd}
+			</if>
+			<if test="state != null and state !=''">
+			and state = #{state}
+			</if>
+			<if test="type != null and type !=''">
+			and type = #{type}
+			</if>
+			<if test="inviteCode != null and inviteCode !=''">
+			and invite_code = #{inviteCode}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.MeasureReadDao">
+
+	<sql id="Base_Column_List" >
+		measure_id,measure_name,measure_group_id,measure_size,min_size,decimal_num,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Measure">
+        select <include refid="Base_Column_List"/>
+		from measure
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from measure
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="measureId != null and measureId !=''">
+			and measure_id = #{measureId}
+			</if>
+			<if test="measureName != null and measureName !=''">
+			and measure_name = #{measureName}
+			</if>
+			<if test="measureGroupId != null and measureGroupId !=''">
+			and measure_group_id = #{measureGroupId}
+			</if>
+			<if test="measureSize != null and measureSize !=''">
+			and measure_size = #{measureSize}
+			</if>
+			<if test="minSize != null and minSize !=''">
+			and min_size = #{minSize}
+			</if>
+			<if test="decimalNum != null and decimalNum !=''">
+			and decimal_num = #{decimalNum}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

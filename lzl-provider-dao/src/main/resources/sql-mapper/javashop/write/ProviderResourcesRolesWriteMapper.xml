@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ejavashop.dao.shop.write.provider.ProviderResourcesRolesWriteDao">
+	
+	<delete id="deleteProviderResourcesRolesById" parameterType="java.lang.Integer">
+		delete from provider_resources_roles
+		where id = #{providerResourcesRolesId}
+	</delete>
+	
+	<insert id="post">
+		insert into provider_resources_roles (id,system_resources_id,provider_roles_id,create_time,modify_time )
+		values (#{id},#{systemResourcesId},#{providerRolesId},#{createTime},#{modifyTime})
+	</insert>
+	
+	 <update id="put">
+        update provider_resources_roles
+        <set>
+				id = #{id},
+				system_resources_id = #{systemResourcesId},
+				provider_roles_id = #{providerRolesId},
+				create_time = #{createTime},
+				modify_time = #{modifyTime},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

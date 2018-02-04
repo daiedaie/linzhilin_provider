@@ -4,6 +4,18 @@
     <groupId>com.lzl</groupId>
     <artifactId>linzhilin-provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>lzl-provider-service</artifactId>
+  
+	<packaging>jar</packaging>
+	<artifactId>lzl-provider-service</artifactId>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.lzl</groupId>
+			<artifactId>lzl-provider-dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 </project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ejavashop.dao.shop.write.provider.RepositoryWriteDao">
+	
+	<delete id="deleteRepositoryById" parameterType="java.lang.Integer">
+		delete from repository
+		where repository_id = #{repositoryId}
+	</delete>
+	
+	<insert id="post">
+		insert into repository (repository_id,repository_name,provider_id,address,real_virtual,status,available,level,create_time,modify_time )
+		values (#{repositoryId},#{repositoryName},#{providerId},#{address},#{realVirtual},#{status},#{available},#{level},#{createTime},#{modifyTime})
+	</insert>
+	
+	 <update id="put">
+        update repository
+        <set>
+				repository_id = #{repositoryId},
+				repository_name = #{repositoryName},
+				provider_id = #{providerId},
+				address = #{address},
+				real_virtual = #{realVirtual},
+				status = #{status},
+				available = #{available},
+				level = #{level},
+				create_time = #{createTime},
+				modify_time = #{modifyTime},
+        </set>
+        where repository_id = #{repositoryId} 
+    </update>
+
+</mapper>

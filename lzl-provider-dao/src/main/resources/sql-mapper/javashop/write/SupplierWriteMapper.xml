@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SupplierWriteDao">
+	
+	<insert id="post">
+		insert into supplier (id,member_id,name,supplier_name,supplier_logo,supplier_grade,score_service,score_deliver_goods,score_description,product_number,collection_number,create_time,sale_money,order_count,order_count_over,supplier_keyword,supplier_des,audit_status,store_slide )
+		values (#{id},#{memberId},#{name},#{supplierName},#{supplierLogo},#{supplierGrade},#{scoreService},#{scoreDeliverGoods},#{scoreDescription},#{productNumber},#{collectionNumber},#{createTime},#{saleMoney},#{orderCount},#{orderCountOver},#{supplierKeyword},#{supplierDes},#{auditStatus},#{storeSlide})
+	</insert>
+
+    <update id="put">
+        update supplier
+        <set>
+				id = #{id},
+				member_id = #{memberId},
+				name = #{name},
+				supplier_name = #{supplierName},
+				supplier_logo = #{supplierLogo},
+				supplier_grade = #{supplierGrade},
+				score_service = #{scoreService},
+				score_deliver_goods = #{scoreDeliverGoods},
+				score_description = #{scoreDescription},
+				product_number = #{productNumber},
+				collection_number = #{collectionNumber},
+				create_time = #{createTime},
+				sale_money = #{saleMoney},
+				order_count = #{orderCount},
+				order_count_over = #{orderCountOver},
+				supplier_keyword = #{supplierKeyword},
+				supplier_des = #{supplierDes},
+				audit_status = #{auditStatus},
+				store_slide = #{storeSlide},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

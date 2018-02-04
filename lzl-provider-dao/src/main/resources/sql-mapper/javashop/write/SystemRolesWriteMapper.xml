@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SystemRolesWriteDao">
+	
+	<insert id="post">
+		insert into system_roles (roles_name,content,user_id,create_time,update_time,status,role_code )
+		values (#{rolesName},#{content},#{userId},now(),now(),1,#{roleCode})
+	</insert>
+
+    <update id="put">
+        update system_roles
+        <set>
+			<if test="rolesName != null and rolesName !=''">
+			roles_name = #{rolesName},
+			</if>
+			<if test="content != null and content !=''">
+			content = #{content},
+			</if>
+			<if test="status != null and status !=''">
+			status = #{status},
+			</if>
+			<if test="roleCode != null and roleCode !=''">
+			role_code = #{roleCode},
+			</if>
+			update_time = now(),
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.PlatProductWriteDao">
+	
+	<insert id="post">
+		insert into plat_product (id,product_code,template_type,product_cate_id,name1,product_brand_id,market_price,mal_mobile_price,product_stock,norm_name,manufacturer,origin,sku,state,description,packing,master_img,update_time,create_time )
+		values (#{id},#{productCode},#{templateType},#{productCateId},#{name1},#{productBrandId},#{marketPrice},#{malMobilePrice},#{productStock},#{normName},#{manufacturer},#{origin},#{sku},#{state},#{description},#{packing},#{masterImg},#{updateTime},#{createTime})
+	</insert>
+
+    <update id="put">
+        update plat_product
+        <set>
+				id = #{id},
+				product_code = #{productCode},
+				template_type = #{templateType},
+				product_cate_id = #{productCateId},
+				name1 = #{name1},
+				product_brand_id = #{productBrandId},
+				market_price = #{marketPrice},
+				mal_mobile_price = #{malMobilePrice},
+				product_stock = #{productStock},
+				norm_name = #{normName},
+				manufacturer = #{manufacturer},
+				origin = #{origin},
+				sku = #{sku},
+				state = #{state},
+				description = #{description},
+				packing = #{packing},
+				master_img = #{masterImg},
+				update_time = #{updateTime},
+				create_time = #{createTime},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

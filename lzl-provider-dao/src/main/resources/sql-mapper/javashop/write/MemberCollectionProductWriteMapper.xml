@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.MemberCollectionProductWriteDao">
+	
+	<insert id="post">
+		insert into member_collection_product (id,member_id,product_id,cate_id,seller_id,create_time,update_time,state )
+		values (#{id},#{memberId},#{productId},#{cateId},#{sellerId},#{createTime},#{updateTime},#{state})
+	</insert>
+
+    <update id="put">
+        update member_collection_product
+        <set>
+				id = #{id},
+				member_id = #{memberId},
+				product_id = #{productId},
+				cate_id = #{cateId},
+				seller_id = #{sellerId},
+				create_time = #{createTime},
+				update_time = #{updateTime},
+				state = #{state},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

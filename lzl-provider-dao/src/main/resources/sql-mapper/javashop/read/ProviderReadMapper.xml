@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.ProviderReadDao">
+
+	<sql id="Base_Column_List" >
+		provider_id,provider_name,provider_type_id,location_id,linkman,telephone,tax_rate_id,address,post_code,email,wechat,business_licence,remark,apply_date,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Provider">
+        select <include refid="Base_Column_List"/>
+		from provider
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from provider
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="providerId != null and providerId !=''">
+			and provider_id = #{providerId}
+			</if>
+			<if test="providerName != null and providerName !=''">
+			and provider_name = #{providerName}
+			</if>
+			<if test="providerTypeId != null and providerTypeId !=''">
+			and provider_type_id = #{providerTypeId}
+			</if>
+			<if test="locationId != null and locationId !=''">
+			and location_id = #{locationId}
+			</if>
+			<if test="linkman != null and linkman !=''">
+			and linkman = #{linkman}
+			</if>
+			<if test="telephone != null and telephone !=''">
+			and telephone = #{telephone}
+			</if>
+			<if test="taxRateId != null and taxRateId !=''">
+			and tax_rate_id = #{taxRateId}
+			</if>
+			<if test="address != null and address !=''">
+			and address = #{address}
+			</if>
+			<if test="postCode != null and postCode !=''">
+			and post_code = #{postCode}
+			</if>
+			<if test="email != null and email !=''">
+			and email = #{email}
+			</if>
+			<if test="wechat != null and wechat !=''">
+			and wechat = #{wechat}
+			</if>
+			<if test="businessLicence != null and businessLicence !=''">
+			and business_licence = #{businessLicence}
+			</if>
+			<if test="remark != null and remark !=''">
+			and remark = #{remark}
+			</if>
+			<if test="applyDate != null and applyDate !=''">
+			and apply_date = #{applyDate}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

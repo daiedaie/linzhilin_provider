@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.ProductWriteDao">
+	
+	<insert id="post">
+		insert into product (id,seller_id,product_code,product_cate_id,name1,state,product_brand_id,mal_mobile_price,master_img,up_time,actual_sales,norm_name,sku,create_time,update_time,market_price,is_self,is_top,origin,description,packing,err_msg,name2,keyword,cost_price,protected_price,mall_pc_price,virtual_sales,product_stock,is_norm,norm_ids,create_id,seller_cate_id,seller_is_top,seller_state,comments_number,product_cate_state,is_invented_product,transport_id,supplier_id,supplier_product_id,seller_id2,supplier_stock )
+		values (#{id},#{sellerId},#{productCode},#{productCateId},#{name1},#{state},#{productBrandId},#{malMobilePrice},#{masterImg},#{upTime},#{actualSales},#{normName},#{sku},#{createTime},#{updateTime},#{marketPrice},#{isSelf},#{isTop},#{origin},#{description},#{packing},#{errMsg},#{name2},#{keyword},#{costPrice},#{protectedPrice},#{mallPcPrice},#{virtualSales},#{productStock},#{isNorm},#{normIds},#{createId},#{sellerCateId},#{sellerIsTop},#{sellerState},#{commentsNumber},#{productCateState},#{isInventedProduct},#{transportId},#{supplierId},#{supplierProductId},#{sellerId2},#{supplierStock})
+	</insert>
+
+    <update id="put">
+        update product
+        <set>
+				id = #{id},
+				seller_id = #{sellerId},
+				product_code = #{productCode},
+				product_cate_id = #{productCateId},
+				name1 = #{name1},
+				state = #{state},
+				product_brand_id = #{productBrandId},
+				mal_mobile_price = #{malMobilePrice},
+				master_img = #{masterImg},
+				up_time = #{upTime},
+				actual_sales = #{actualSales},
+				norm_name = #{normName},
+				sku = #{sku},
+				create_time = #{createTime},
+				update_time = #{updateTime},
+				market_price = #{marketPrice},
+				is_self = #{isSelf},
+				is_top = #{isTop},
+				origin = #{origin},
+				description = #{description},
+				packing = #{packing},
+				err_msg = #{errMsg},
+				name2 = #{name2},
+				keyword = #{keyword},
+				cost_price = #{costPrice},
+				protected_price = #{protectedPrice},
+				mall_pc_price = #{mallPcPrice},
+				virtual_sales = #{virtualSales},
+				product_stock = #{productStock},
+				is_norm = #{isNorm},
+				norm_ids = #{normIds},
+				create_id = #{createId},
+				seller_cate_id = #{sellerCateId},
+				seller_is_top = #{sellerIsTop},
+				seller_state = #{sellerState},
+				comments_number = #{commentsNumber},
+				product_cate_state = #{productCateState},
+				is_invented_product = #{isInventedProduct},
+				transport_id = #{transportId},
+				supplier_id = #{supplierId},
+				supplier_product_id = #{supplierProductId},
+				seller_id2 = #{sellerId2},
+				supplier_stock = #{supplierStock},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

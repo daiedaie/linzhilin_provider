@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.GoodsTypeReadDao">
+
+	<sql id="Base_Column_List" >
+		goods_type_id,goods_type_name,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.GoodsType">
+        select <include refid="Base_Column_List"/>
+		from goods_type
+        <include refid="Where_Clause"/>
+        <if test="startIndex != null and endIndex != null">
+        limit #{startIndex}, #{endIndex}
+        </if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from goods_type
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="goodsTypeId != null and goodsTypeId !=''">
+			and goods_type_id = #{goodsTypeId}
+			</if>
+			<if test="goodsTypeName != null and goodsTypeName !=''">
+			and goods_type_name = #{goodsTypeName}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

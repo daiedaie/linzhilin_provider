@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.SupplierRolesWriteDao">
+	
+	<insert id="post">
+		insert into supplier_roles (id,supplier_id,roles_name,role_code,content,user_id,create_time,update_time,status )
+		values (#{id},#{supplierId},#{rolesName},#{roleCode},#{content},#{userId},#{createTime},#{updateTime},#{status})
+	</insert>
+
+    <update id="put">
+        update supplier_roles
+        <set>
+				id = #{id},
+				supplier_id = #{supplierId},
+				roles_name = #{rolesName},
+				role_code = #{roleCode},
+				content = #{content},
+				user_id = #{userId},
+				create_time = #{createTime},
+				update_time = #{updateTime},
+				status = #{status},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

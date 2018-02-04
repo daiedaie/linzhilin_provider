@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.MemberCouponsReadDao">
+
+	<sql id="Base_Column_List" >
+		id,user_id,type,promotion_id,promotion_name,start_time,end_time,discount,pic,state,seller_id,get_time,use_time,order_id 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.MemberCoupons">
+        select <include refid="Base_Column_List" />
+		from member_coupons
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.MemberCoupons">
+        select <include refid="Base_Column_List" />
+		from member_coupons
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from member_coupons
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="userId != null and userId !=''">
+			and user_id = #{userId}
+			</if>
+			<if test="type != null and type !=''">
+			and type = #{type}
+			</if>
+			<if test="promotionId != null and promotionId !=''">
+			and promotion_id = #{promotionId}
+			</if>
+			<if test="promotionName != null and promotionName !=''">
+			and promotion_name = #{promotionName}
+			</if>
+			<if test="startTime != null and startTime !=''">
+			and start_time = #{startTime}
+			</if>
+			<if test="endTime != null and endTime !=''">
+			and end_time = #{endTime}
+			</if>
+			<if test="discount != null and discount !=''">
+			and discount = #{discount}
+			</if>
+			<if test="pic != null and pic !=''">
+			and pic = #{pic}
+			</if>
+			<if test="state != null and state !=''">
+			and state = #{state}
+			</if>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_id = #{sellerId}
+			</if>
+			<if test="getTime != null and getTime !=''">
+			and get_time = #{getTime}
+			</if>
+			<if test="useTime != null and useTime !=''">
+			and use_time = #{useTime}
+			</if>
+			<if test="orderId != null and orderId !=''">
+			and order_id = #{orderId}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

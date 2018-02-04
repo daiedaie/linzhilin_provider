@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.ProductBrandWriteDao">
+	
+	<insert id="post">
+		insert into product_brand (id,name,name_first,image,look_method,top,sort,create_id,create_time,update_id,update_time,state )
+		values (#{id},#{name},#{nameFirst},#{image},#{lookMethod},#{top},#{sort},#{createId},#{createTime},#{updateId},#{updateTime},#{state})
+	</insert>
+
+    <update id="put">
+        update product_brand
+        <set>
+				id = #{id},
+				name = #{name},
+				name_first = #{nameFirst},
+				image = #{image},
+				look_method = #{lookMethod},
+				top = #{top},
+				sort = #{sort},
+				create_id = #{createId},
+				create_time = #{createTime},
+				update_id = #{updateId},
+				update_time = #{updateTime},
+				state = #{state},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

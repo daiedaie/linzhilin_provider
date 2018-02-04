@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.DeliverymanSellerApplyReadDao">
+
+	<sql id="Base_Column_List" >
+		id,member_id,seller_id,apply_description,status,apply_time,check_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.DeliverymanSellerApply">
+        select <include refid="Base_Column_List" />
+		from deliveryman_seller_apply
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.DeliverymanSellerApply">
+        select <include refid="Base_Column_List" />
+		from deliveryman_seller_apply
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from deliveryman_seller_apply
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="memberId != null and memberId !=''">
+			and member_id = #{memberId}
+			</if>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_id = #{sellerId}
+			</if>
+			<if test="applyDescription != null and applyDescription !=''">
+			and apply_description = #{applyDescription}
+			</if>
+			<if test="status != null and status !=''">
+			and status = #{status}
+			</if>
+			<if test="applyTime != null and applyTime !=''">
+			and apply_time = #{applyTime}
+			</if>
+			<if test="checkTime != null and checkTime !=''">
+			and check_time = #{checkTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

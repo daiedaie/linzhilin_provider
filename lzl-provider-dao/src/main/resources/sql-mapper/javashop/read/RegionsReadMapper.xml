@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.RegionsReadDao">
+
+	<sql id="Base_Column_List" >
+		id,parentId,regionName,parentPath,firstLetter,regionType,agencyId,shippingId,visible,rowId 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.Regions">
+        select <include refid="Base_Column_List" />
+		from regions
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Regions">
+        select <include refid="Base_Column_List" />
+		from regions
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from regions
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="parentId != null and parentId !=''">
+			and parentId = #{parentId}
+			</if>
+			<if test="regionName != null and regionName !=''">
+			and regionName = #{regionName}
+			</if>
+			<if test="parentPath != null and parentPath !=''">
+			and parentPath = #{parentPath}
+			</if>
+			<if test="firstLetter != null and firstLetter !=''">
+			and firstLetter = #{firstLetter}
+			</if>
+			<if test="regionType != null and regionType !=''">
+			and regionType = #{regionType}
+			</if>
+			<if test="agencyId != null and agencyId !=''">
+			and agencyId = #{agencyId}
+			</if>
+			<if test="shippingId != null and shippingId !=''">
+			and shippingId = #{shippingId}
+			</if>
+			<if test="visible != null and visible !=''">
+			and visible = #{visible}
+			</if>
+			<if test="rowId != null and rowId !=''">
+			and rowId = #{rowId}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

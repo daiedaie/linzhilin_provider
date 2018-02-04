@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SellerReadDao">
+
+	<sql id="Base_Column_List" >
+		id,member_id,name,seller_name,seller_logo,seller_grade,score_service,score_deliver_goods,score_description,product_number,collection_number,create_time,sale_money,order_count,order_count_over,seller_keyword,seller_des,audit_status,store_slide,qrcode,delivery_time,is_delivery,initial_fee,delivery_fee,initial_delivery_fee,push_time,open_id,alipay,alipay_name 
+	</sql>
+
+    <select id="getSingle" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Seller">
+        select <include refid="Base_Column_List" />
+		from seller
+		<include refid="Where_Clause"/> 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.Seller">
+        select <include refid="Base_Column_List" />
+		from seller
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from seller
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="memberId != null and memberId !=''">
+			and member_id = #{memberId}
+			</if>
+			<if test="name != null and name !=''">
+			and name = #{name}
+			</if>
+			<if test="sellerName != null and sellerName !=''">
+			and seller_name = #{sellerName}
+			</if>
+			<if test="sellerLogo != null and sellerLogo !=''">
+			and seller_logo = #{sellerLogo}
+			</if>
+			<if test="sellerGrade != null and sellerGrade !=''">
+			and seller_grade = #{sellerGrade}
+			</if>
+			<if test="scoreService != null and scoreService !=''">
+			and score_service = #{scoreService}
+			</if>
+			<if test="scoreDeliverGoods != null and scoreDeliverGoods !=''">
+			and score_deliver_goods = #{scoreDeliverGoods}
+			</if>
+			<if test="scoreDescription != null and scoreDescription !=''">
+			and score_description = #{scoreDescription}
+			</if>
+			<if test="productNumber != null and productNumber !=''">
+			and product_number = #{productNumber}
+			</if>
+			<if test="collectionNumber != null and collectionNumber !=''">
+			and collection_number = #{collectionNumber}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="saleMoney != null and saleMoney !=''">
+			and sale_money = #{saleMoney}
+			</if>
+			<if test="orderCount != null and orderCount !=''">
+			and order_count = #{orderCount}
+			</if>
+			<if test="orderCountOver != null and orderCountOver !=''">
+			and order_count_over = #{orderCountOver}
+			</if>
+			<if test="sellerKeyword != null and sellerKeyword !=''">
+			and seller_keyword = #{sellerKeyword}
+			</if>
+			<if test="sellerDes != null and sellerDes !=''">
+			and seller_des = #{sellerDes}
+			</if>
+			<if test="auditStatus != null and auditStatus !=''">
+			and audit_status = #{auditStatus}
+			</if>
+			<if test="storeSlide != null and storeSlide !=''">
+			and store_slide = #{storeSlide}
+			</if>
+			<if test="qrcode != null and qrcode !=''">
+			and qrcode = #{qrcode}
+			</if>
+			<if test="deliveryTime != null and deliveryTime !=''">
+			and delivery_time = #{deliveryTime}
+			</if>
+			<if test="isDelivery != null and isDelivery !=''">
+			and is_delivery = #{isDelivery}
+			</if>
+			<if test="initialFee != null and initialFee !=''">
+			and initial_fee = #{initialFee}
+			</if>
+			<if test="deliveryFee != null and deliveryFee !=''">
+			and delivery_fee = #{deliveryFee}
+			</if>
+			<if test="initialDeliveryFee != null and initialDeliveryFee !=''">
+			and initial_delivery_fee = #{initialDeliveryFee}
+			</if>
+			<if test="pushTime != null and pushTime !=''">
+			and push_time = #{pushTime}
+			</if>
+			<if test="openId != null and openId !=''">
+			and open_id = #{openId}
+			</if>
+			<if test="alipay != null and alipay !=''">
+			and alipay = #{alipay}
+			</if>
+			<if test="alipayName != null and alipayName !=''">
+			and alipay_name = #{alipayName}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SearchSettingReadDao">
+
+	<sql id="Base_Column_List" >
+		id,keyword,keyword_filter,index_product_id,index_product_time,update_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.SearchSetting">
+        select <include refid="Base_Column_List" />
+		from search_setting
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.SearchSetting">
+        select <include refid="Base_Column_List" />
+		from search_setting
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from search_setting
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="keyword != null and keyword !=''">
+			and keyword = #{keyword}
+			</if>
+			<if test="keywordFilter != null and keywordFilter !=''">
+			and keyword_filter = #{keywordFilter}
+			</if>
+			<if test="indexProductId != null and indexProductId !=''">
+			and index_product_id = #{indexProductId}
+			</if>
+			<if test="indexProductTime != null and indexProductTime !=''">
+			and index_product_time = #{indexProductTime}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

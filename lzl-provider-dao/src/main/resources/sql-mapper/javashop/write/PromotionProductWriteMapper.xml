@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.PromotionProductWriteDao">
+	
+	<insert id="post">
+		insert into promotion_product (promotion_product_id,promotion_id,user_type,user_id,product_range,product_content,alarm_value,is_valid,create_time )
+		values (#{promotionProductId},#{promotionId},#{userType},#{userId},#{productRange},#{productContent},#{alarmValue},#{isValid},#{createTime})
+	</insert>
+
+    <update id="put">
+        update promotion_product
+        <set>
+				promotion_product_id = #{promotionProductId},
+				promotion_id = #{promotionId},
+				user_type = #{userType},
+				user_id = #{userId},
+				product_range = #{productRange},
+				product_content = #{productContent},
+				alarm_value = #{alarmValue},
+				is_valid = #{isValid},
+				create_time = #{createTime},
+        </set>
+        where promotion_product_id = #{promotionProductId} 
+    </update>
+
+</mapper>

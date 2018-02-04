@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.SupplierApplyReadDao">
+
+	<sql id="Base_Column_List" >
+		id,user_id,name,password,company,description,bussiness_license,tax_license,company_province,company_city,company_area,company_town,longitude,latitude,company_start_time,company_end_time,company_add,telephone,fax,bussiness_license_image,organization,bank_user,bank_name,bank_name_branch,brand_name_code,bank_code,bank_province,bank_city,bank_pic,legal_person,legal_person_card,idcard_pic,person_phone,email,state,type,opt_id,has_refrigerater,bond,create_time,update_time,supplier_applycol 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.SupplierApply">
+        select <include refid="Base_Column_List" />
+		from supplier_apply
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.SupplierApply">
+        select <include refid="Base_Column_List" />
+		from supplier_apply
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from supplier_apply
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="userId != null and userId !=''">
+			and user_id = #{userId}
+			</if>
+			<if test="name != null and name !=''">
+			and name = #{name}
+			</if>
+			<if test="password != null and password !=''">
+			and password = #{password}
+			</if>
+			<if test="company != null and company !=''">
+			and company = #{company}
+			</if>
+			<if test="description != null and description !=''">
+			and description = #{description}
+			</if>
+			<if test="bussinessLicense != null and bussinessLicense !=''">
+			and bussiness_license = #{bussinessLicense}
+			</if>
+			<if test="taxLicense != null and taxLicense !=''">
+			and tax_license = #{taxLicense}
+			</if>
+			<if test="companyProvince != null and companyProvince !=''">
+			and company_province = #{companyProvince}
+			</if>
+			<if test="companyCity != null and companyCity !=''">
+			and company_city = #{companyCity}
+			</if>
+			<if test="companyArea != null and companyArea !=''">
+			and company_area = #{companyArea}
+			</if>
+			<if test="companyTown != null and companyTown !=''">
+			and company_town = #{companyTown}
+			</if>
+			<if test="longitude != null and longitude !=''">
+			and longitude = #{longitude}
+			</if>
+			<if test="latitude != null and latitude !=''">
+			and latitude = #{latitude}
+			</if>
+			<if test="companyStartTime != null and companyStartTime !=''">
+			and company_start_time = #{companyStartTime}
+			</if>
+			<if test="companyEndTime != null and companyEndTime !=''">
+			and company_end_time = #{companyEndTime}
+			</if>
+			<if test="companyAdd != null and companyAdd !=''">
+			and company_add = #{companyAdd}
+			</if>
+			<if test="telephone != null and telephone !=''">
+			and telephone = #{telephone}
+			</if>
+			<if test="fax != null and fax !=''">
+			and fax = #{fax}
+			</if>
+			<if test="bussinessLicenseImage != null and bussinessLicenseImage !=''">
+			and bussiness_license_image = #{bussinessLicenseImage}
+			</if>
+			<if test="organization != null and organization !=''">
+			and organization = #{organization}
+			</if>
+			<if test="bankUser != null and bankUser !=''">
+			and bank_user = #{bankUser}
+			</if>
+			<if test="bankName != null and bankName !=''">
+			and bank_name = #{bankName}
+			</if>
+			<if test="bankNameBranch != null and bankNameBranch !=''">
+			and bank_name_branch = #{bankNameBranch}
+			</if>
+			<if test="brandNameCode != null and brandNameCode !=''">
+			and brand_name_code = #{brandNameCode}
+			</if>
+			<if test="bankCode != null and bankCode !=''">
+			and bank_code = #{bankCode}
+			</if>
+			<if test="bankProvince != null and bankProvince !=''">
+			and bank_province = #{bankProvince}
+			</if>
+			<if test="bankCity != null and bankCity !=''">
+			and bank_city = #{bankCity}
+			</if>
+			<if test="bankPic != null and bankPic !=''">
+			and bank_pic = #{bankPic}
+			</if>
+			<if test="legalPerson != null and legalPerson !=''">
+			and legal_person = #{legalPerson}
+			</if>
+			<if test="legalPersonCard != null and legalPersonCard !=''">
+			and legal_person_card = #{legalPersonCard}
+			</if>
+			<if test="idcardPic != null and idcardPic !=''">
+			and idcard_pic = #{idcardPic}
+			</if>
+			<if test="personPhone != null and personPhone !=''">
+			and person_phone = #{personPhone}
+			</if>
+			<if test="email != null and email !=''">
+			and email = #{email}
+			</if>
+			<if test="state != null and state !=''">
+			and state = #{state}
+			</if>
+			<if test="type != null and type !=''">
+			and type = #{type}
+			</if>
+			<if test="optId != null and optId !=''">
+			and opt_id = #{optId}
+			</if>
+			<if test="hasRefrigerater != null and hasRefrigerater !=''">
+			and has_refrigerater = #{hasRefrigerater}
+			</if>
+			<if test="bond != null and bond !=''">
+			and bond = #{bond}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="supplierApplycol != null and supplierApplycol !=''">
+			and supplier_applycol = #{supplierApplycol}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

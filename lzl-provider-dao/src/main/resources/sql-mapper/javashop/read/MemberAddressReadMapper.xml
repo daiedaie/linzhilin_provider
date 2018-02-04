@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.MemberAddressReadDao">
+
+	<sql id="Base_Column_List" >
+		id,member_id,member_name,province_id,city_id,area_id,town_id,longitude,latitude,town,address_info,house_no,name,mobile,phone,email,zip_code,state,create_time,update_time 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.MemberAddress">
+        select <include refid="Base_Column_List" />
+		from member_address
+		where id = #{id} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.MemberAddress">
+        select <include refid="Base_Column_List" />
+		from member_address
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from member_address
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="memberId != null and memberId !=''">
+			and member_id = #{memberId}
+			</if>
+			<if test="memberName != null and memberName !=''">
+			and member_name = #{memberName}
+			</if>
+			<if test="provinceId != null and provinceId !=''">
+			and province_id = #{provinceId}
+			</if>
+			<if test="cityId != null and cityId !=''">
+			and city_id = #{cityId}
+			</if>
+			<if test="areaId != null and areaId !=''">
+			and area_id = #{areaId}
+			</if>
+			<if test="townId != null and townId !=''">
+			and town_id = #{townId}
+			</if>
+			<if test="longitude != null and longitude !=''">
+			and longitude = #{longitude}
+			</if>
+			<if test="latitude != null and latitude !=''">
+			and latitude = #{latitude}
+			</if>
+			<if test="town != null and town !=''">
+			and town = #{town}
+			</if>
+			<if test="addressInfo != null and addressInfo !=''">
+			and address_info = #{addressInfo}
+			</if>
+			<if test="houseNo != null and houseNo !=''">
+			and house_no = #{houseNo}
+			</if>
+			<if test="name != null and name !=''">
+			and name = #{name}
+			</if>
+			<if test="mobile != null and mobile !=''">
+			and mobile = #{mobile}
+			</if>
+			<if test="phone != null and phone !=''">
+			and phone = #{phone}
+			</if>
+			<if test="email != null and email !=''">
+			and email = #{email}
+			</if>
+			<if test="zipCode != null and zipCode !=''">
+			and zip_code = #{zipCode}
+			</if>
+			<if test="state != null and state !=''">
+			and state = #{state}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

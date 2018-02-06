@@ -59,6 +59,18 @@ public class ProviderUser implements Serializable{
     /** 最后一次编辑时间 */
     private java.util.Date modifyTime;
 
+    /****************************************************************************/
+    /**用户资源路径*/
+    private String urls;
+
+    
+    public String getUrls() {
+		return urls;
+	}
+
+	public void setUrls(String urls) {
+		this.urls = urls;
+	}
 
     public void setUserId(java.lang.Integer userId) {
         this.userId = userId;

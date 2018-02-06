@@ -28,10 +28,9 @@ public class GoodsServiceImpl implements IGoodsService {
 			if(pager.isGetCount()){
 				pager.setRowsCount(goodsReadDao.getCount(queryMap));
 			}
+			queryMap.put("startIndex", pager.getStart());
+			queryMap.put("endIndex", pager.getStart() + pager.getPageSize() - 1);
 		}
-		
-		queryMap.put("startIndex", pager.getStart());
-		queryMap.put("endIndex", pager.getStart() + pager.getPageSize() - 1);
 		
 		List<Goods> goodsList = goodsReadDao.get(queryMap);
 		return goodsList;

@@ -51,16 +51,16 @@
 	</sql>
 
 	<!-- 用户登录查询权限 -->
-	<select id="getResourceByRoleId" resultType="String">
+	<select id="getResourceByRoleId" resultType="java.lang.String">
 		select t1.url from `system_resources` t1
-		where t1.id in(select t2.resources_id from `system_resources_roles` t2 where t2.roles_id = #{roleId})
+		where t1.id in(select t2.system_resources_id from `provider_resources_roles` t2 where t2.provider_roles_id = #{roleId})
 		and t1.scope=#{scope}
 		and t1.status=1
 		order by id
 	</select>		
 	
 	<!-- 查询角色权限id -->
-	<select id="getResourceIdByRoleId" resultType="Integer">
+	<select id="getResourceIdByRoleId" resultType="java.lang.Integer">
 		select t1.id from `system_resources` t1
 		where t1.id in(select t2.resources_id from `system_resources_roles` t2 where t2.roles_id = #{roleId})
 		and t1.scope=#{scope}

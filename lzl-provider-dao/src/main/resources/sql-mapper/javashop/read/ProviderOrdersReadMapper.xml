@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.ProviderOrdersReadDao">
+
+	<sql id="Base_Column_List" >
+		id,order_sn,order_type,relation_order_sn,goods_money,express_money,tax_money,orders_money,invoice_status,invoice_title,invoice_type,payment_name,payment_mode,payment_code,payment_status,pay_time,deliver_time,finish_time,update_time,order_status,deliveryman,seller_id,seller_name,provider_id,remark,money_paid_balance,money_paid_reality,money_coupon,money_act_full,money_discount,money_back,money_integral,integral,coupon_user_id,act_full_id,ip,name,province_id,city_id,area_id,town,address_info,house_no,house_name,mobile,email,zip_code,trade_sn,source,logistics_id,logistics_name,logistics_number,is_codconfim,codconfirm_id,codconfirm_name,codconfirm_time,codconfirm_remark,codconfirm_state,create_time,delivery_time,delivery_type,get_code,withdraw_id,active 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.ProviderOrders">
+        select <include refid="Base_Column_List"/>
+		from provider_orders
+        <include refid="Where_Clause"/>
+        <if test="startIndex != null and endIndex != null">
+        	limit #{startIndex}, #{endIndex}
+        </if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from provider_orders
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="orderSn != null and orderSn !=''">
+			and order_sn like CONCAT('%', TRIM(#{orderSn}), '%')
+			</if>
+			<if test="orderType != null and orderType !=''">
+			and order_type = #{orderType}
+			</if>
+			<if test="relationOrderSn != null and relationOrderSn !=''">
+			and relation_order_sn = #{relationOrderSn}
+			</if>
+			<if test="goodsMoney != null and goodsMoney !=''">
+			and goods_money = #{goodsMoney}
+			</if>
+			<if test="expressMoney != null and expressMoney !=''">
+			and express_money = #{expressMoney}
+			</if>
+			<if test="taxMoney != null and taxMoney !=''">
+			and tax_money = #{taxMoney}
+			</if>
+			<if test="ordersMoney != null and ordersMoney !=''">
+			and orders_money = #{ordersMoney}
+			</if>
+			<if test="invoiceStatus != null and invoiceStatus !=''">
+			and invoice_status = #{invoiceStatus}
+			</if>
+			<if test="invoiceTitle != null and invoiceTitle !=''">
+			and invoice_title = #{invoiceTitle}
+			</if>
+			<if test="invoiceType != null and invoiceType !=''">
+			and invoice_type = #{invoiceType}
+			</if>
+			<if test="paymentName != null and paymentName !=''">
+			and payment_name = #{paymentName}
+			</if>
+			<if test="paymentMode != null and paymentMode !=''">
+			and payment_mode = #{paymentMode}
+			</if>
+			<if test="paymentCode != null and paymentCode !=''">
+			and payment_code = #{paymentCode}
+			</if>
+			<if test="paymentStatus != null and paymentStatus !=''">
+			and payment_status = #{paymentStatus}
+			</if>
+			<if test="payTime != null and payTime !=''">
+			and pay_time &gt; #{startTime} and pay_time &lt; #{endTime}
+			</if>
+			<if test="deliverTime != null and deliverTime !=''">
+			and deliver_time = #{deliverTime}
+			</if>
+			<if test="finishTime != null and finishTime !=''">
+			and finish_time = #{finishTime}
+			</if>
+			<if test="updateTime != null and updateTime !=''">
+			and update_time = #{updateTime}
+			</if>
+			<if test="orderStatus != null and orderStatus !=''">
+			and order_status = #{orderStatus}
+			</if>
+			<if test="deliveryman != null and deliveryman !=''">
+			and deliveryman = #{deliveryman}
+			</if>
+			<if test="sellerId != null and sellerId !=''">
+			and seller_id = #{sellerId}
+			</if>
+			<if test="sellerName != null and sellerName !=''">
+			and seller_name = #{sellerName}
+			</if>
+			<if test="providerId != null and providerId !=''">
+			and provider_id = #{providerId}
+			</if>
+			<if test="remark != null and remark !=''">
+			and remark = #{remark}
+			</if>
+			<if test="moneyPaidBalance != null and moneyPaidBalance !=''">
+			and money_paid_balance = #{moneyPaidBalance}
+			</if>
+			<if test="moneyPaidReality != null and moneyPaidReality !=''">
+			and money_paid_reality = #{moneyPaidReality}
+			</if>
+			<if test="moneyCoupon != null and moneyCoupon !=''">
+			and money_coupon = #{moneyCoupon}
+			</if>
+			<if test="moneyActFull != null and moneyActFull !=''">
+			and money_act_full = #{moneyActFull}
+			</if>
+			<if test="moneyDiscount != null and moneyDiscount !=''">
+			and money_discount = #{moneyDiscount}
+			</if>
+			<if test="moneyBack != null and moneyBack !=''">
+			and money_back = #{moneyBack}
+			</if>
+			<if test="moneyIntegral != null and moneyIntegral !=''">
+			and money_integral = #{moneyIntegral}
+			</if>
+			<if test="integral != null and integral !=''">
+			and integral = #{integral}
+			</if>
+			<if test="couponUserId != null and couponUserId !=''">
+			and coupon_user_id = #{couponUserId}
+			</if>
+			<if test="actFullId != null and actFullId !=''">
+			and act_full_id = #{actFullId}
+			</if>
+			<if test="ip != null and ip !=''">
+			and ip = #{ip}
+			</if>
+			<if test="name != null and name !=''">
+			and name = #{name}
+			</if>
+			<if test="provinceId != null and provinceId !=''">
+			and province_id = #{provinceId}
+			</if>
+			<if test="cityId != null and cityId !=''">
+			and city_id = #{cityId}
+			</if>
+			<if test="areaId != null and areaId !=''">
+			and area_id = #{areaId}
+			</if>
+			<if test="town != null and town !=''">
+			and town = #{town}
+			</if>
+			<if test="addressInfo != null and addressInfo !=''">
+			and address_info = #{addressInfo}
+			</if>
+			<if test="houseNo != null and houseNo !=''">
+			and house_no = #{houseNo}
+			</if>
+			<if test="houseName != null and houseName !=''">
+			and house_name = #{houseName}
+			</if>
+			<if test="mobile != null and mobile !=''">
+			and mobile = #{mobile}
+			</if>
+			<if test="email != null and email !=''">
+			and email = #{email}
+			</if>
+			<if test="zipCode != null and zipCode !=''">
+			and zip_code = #{zipCode}
+			</if>
+			<if test="tradeSn != null and tradeSn !=''">
+			and trade_sn = #{tradeSn}
+			</if>
+			<if test="source != null and source !=''">
+			and source = #{source}
+			</if>
+			<if test="logisticsId != null and logisticsId !=''">
+			and logistics_id = #{logisticsId}
+			</if>
+			<if test="logisticsName != null and logisticsName !=''">
+			and logistics_name = #{logisticsName}
+			</if>
+			<if test="logisticsNumber != null and logisticsNumber !=''">
+			and logistics_number = #{logisticsNumber}
+			</if>
+			<if test="isCodconfim != null and isCodconfim !=''">
+			and is_codconfim = #{isCodconfim}
+			</if>
+			<if test="codconfirmId != null and codconfirmId !=''">
+			and codconfirm_id = #{codconfirmId}
+			</if>
+			<if test="codconfirmName != null and codconfirmName !=''">
+			and codconfirm_name = #{codconfirmName}
+			</if>
+			<if test="codconfirmTime != null and codconfirmTime !=''">
+			and codconfirm_time = #{codconfirmTime}
+			</if>
+			<if test="codconfirmRemark != null and codconfirmRemark !=''">
+			and codconfirm_remark = #{codconfirmRemark}
+			</if>
+			<if test="codconfirmState != null and codconfirmState !=''">
+			and codconfirm_state = #{codconfirmState}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="deliveryTime != null and deliveryTime !=''">
+			and delivery_time = #{deliveryTime}
+			</if>
+			<if test="deliveryType != null and deliveryType !=''">
+			and delivery_type = #{deliveryType}
+			</if>
+			<if test="getCode != null and getCode !=''">
+			and get_code = #{getCode}
+			</if>
+			<if test="withdrawId != null and withdrawId !=''">
+			and withdraw_id = #{withdrawId}
+			</if>
+			<if test="active != null and active !=''">
+			and active = #{active}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

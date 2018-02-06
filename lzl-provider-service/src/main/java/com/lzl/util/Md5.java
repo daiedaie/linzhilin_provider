@@ -339,7 +339,7 @@ public class Md5 {
     }
 
     public static void main(String args[]) throws IOException {
-        String a = Md5.getMd5String("admin");
+        String a = Md5.getMd5String("111111");
         System.out.println("---:" + a);
     }
 

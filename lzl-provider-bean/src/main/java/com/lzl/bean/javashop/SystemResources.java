@@ -25,6 +25,10 @@ public class SystemResources implements Serializable{
     /*** 新资源使用范围：6、平台*/
     public final static Integer S_ADMIN  = 6;
     
+    /*** 资源使用范围：4、供应商 */
+    public final static Integer S_PROVIDER  = 4;
+    
+    
     /*** 正常*/
     public final static Integer NORMAL  = 1;
     /*** 删除*/

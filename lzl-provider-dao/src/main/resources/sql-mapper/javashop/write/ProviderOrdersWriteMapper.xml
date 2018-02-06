@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.ProviderOrdersWriteDao">
+	
+	<insert id="post">
+		insert into provider_orders (id,order_sn,order_type,relation_order_sn,goods_money,express_money,tax_money,orders_money,invoice_status,invoice_title,invoice_type,payment_name,payment_mode,payment_code,payment_status,pay_time,deliver_time,finish_time,update_time,order_status,deliveryman,seller_id,seller_name,provider_id,remark,money_paid_balance,money_paid_reality,money_coupon,money_act_full,money_discount,money_back,money_integral,integral,coupon_user_id,act_full_id,ip,name,province_id,city_id,area_id,town,address_info,house_no,house_name,mobile,email,zip_code,trade_sn,source,logistics_id,logistics_name,logistics_number,is_codconfim,codconfirm_id,codconfirm_name,codconfirm_time,codconfirm_remark,codconfirm_state,create_time,delivery_time,delivery_type,get_code,withdraw_id,active )
+		values (#{id},#{orderSn},#{orderType},#{relationOrderSn},#{goodsMoney},#{expressMoney},#{taxMoney},#{ordersMoney},#{invoiceStatus},#{invoiceTitle},#{invoiceType},#{paymentName},#{paymentMode},#{paymentCode},#{paymentStatus},#{payTime},#{deliverTime},#{finishTime},#{updateTime},#{orderStatus},#{deliveryman},#{sellerId},#{sellerName},#{providerId},#{remark},#{moneyPaidBalance},#{moneyPaidReality},#{moneyCoupon},#{moneyActFull},#{moneyDiscount},#{moneyBack},#{moneyIntegral},#{integral},#{couponUserId},#{actFullId},#{ip},#{name},#{provinceId},#{cityId},#{areaId},#{town},#{addressInfo},#{houseNo},#{houseName},#{mobile},#{email},#{zipCode},#{tradeSn},#{source},#{logisticsId},#{logisticsName},#{logisticsNumber},#{isCodconfim},#{codconfirmId},#{codconfirmName},#{codconfirmTime},#{codconfirmRemark},#{codconfirmState},#{createTime},#{deliveryTime},#{deliveryType},#{getCode},#{withdrawId},#{active})
+	</insert>
+	
+	 <update id="put">
+        update provider_orders
+        <set>
+				id = #{id},
+				order_sn = #{orderSn},
+				order_type = #{orderType},
+				relation_order_sn = #{relationOrderSn},
+				goods_money = #{goodsMoney},
+				express_money = #{expressMoney},
+				tax_money = #{taxMoney},
+				orders_money = #{ordersMoney},
+				invoice_status = #{invoiceStatus},
+				invoice_title = #{invoiceTitle},
+				invoice_type = #{invoiceType},
+				payment_name = #{paymentName},
+				payment_mode = #{paymentMode},
+				payment_code = #{paymentCode},
+				payment_status = #{paymentStatus},
+				pay_time = #{payTime},
+				deliver_time = #{deliverTime},
+				finish_time = #{finishTime},
+				update_time = #{updateTime},
+				order_status = #{orderStatus},
+				deliveryman = #{deliveryman},
+				seller_id = #{sellerId},
+				seller_name = #{sellerName},
+				provider_id = #{providerId},
+				remark = #{remark},
+				money_paid_balance = #{moneyPaidBalance},
+				money_paid_reality = #{moneyPaidReality},
+				money_coupon = #{moneyCoupon},
+				money_act_full = #{moneyActFull},
+				money_discount = #{moneyDiscount},
+				money_back = #{moneyBack},
+				money_integral = #{moneyIntegral},
+				integral = #{integral},
+				coupon_user_id = #{couponUserId},
+				act_full_id = #{actFullId},
+				ip = #{ip},
+				name = #{name},
+				province_id = #{provinceId},
+				city_id = #{cityId},
+				area_id = #{areaId},
+				town = #{town},
+				address_info = #{addressInfo},
+				house_no = #{houseNo},
+				house_name = #{houseName},
+				mobile = #{mobile},
+				email = #{email},
+				zip_code = #{zipCode},
+				trade_sn = #{tradeSn},
+				source = #{source},
+				logistics_id = #{logisticsId},
+				logistics_name = #{logisticsName},
+				logistics_number = #{logisticsNumber},
+				is_codconfim = #{isCodconfim},
+				codconfirm_id = #{codconfirmId},
+				codconfirm_name = #{codconfirmName},
+				codconfirm_time = #{codconfirmTime},
+				codconfirm_remark = #{codconfirmRemark},
+				codconfirm_state = #{codconfirmState},
+				create_time = #{createTime},
+				delivery_time = #{deliveryTime},
+				delivery_type = #{deliveryType},
+				get_code = #{getCode},
+				withdraw_id = #{withdrawId},
+				active = #{active},
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

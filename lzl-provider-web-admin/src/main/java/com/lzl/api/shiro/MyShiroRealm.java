@@ -25,19 +25,19 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.util.StringUtils;
 
-import com.lzl.bean.javashop.SystemAdmin;
+import com.lzl.bean.javashop.ProviderUser;
 import com.lzl.bean.javashop.SystemResources;
-import com.lzl.service.ISystemAdminService;
+import com.lzl.service.IProviderUserService;
 import com.lzl.service.ISystemResourcesService;
 
 public class MyShiroRealm extends AuthorizingRealm{
 
-    private final Logger        log          = LogManager.getLogger(this.getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Resource
-    private ISystemAdminService          systemAdminService;
-    @Resource
     private ISystemResourcesService systemResourcesService;
+    @Resource
+    private IProviderUserService providerUserService;
 
     /**
      * Shiro登录认证(原理：用户提交 用户名和密码  --- shiro 封装令牌 ---- realm 通过用户名将密码查询返回 ---- shiro 自动去比较查询出密码和用户输入密码是否一致---- 进行登陆控制 )
@@ -48,34 +48,35 @@ public class MyShiroRealm extends AuthorizingRealm{
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 
         Map<String,Object> queryMap = new HashMap<>();
-        queryMap.put("name", token.getUsername());
-        List<SystemAdmin> systemAdminList = new ArrayList<SystemAdmin>();
+        queryMap.put("username", token.getUsername());
+        List<ProviderUser> providerUserList = new ArrayList<>();
         try{
-            systemAdminList = systemAdminService.get(queryMap,null);
+        	providerUserList = providerUserService.get(queryMap,null);
         }catch(Exception e){
         	log.error(e);
         }
 
+        System.out.println("Shiro用户验证时后台查询到的providerUserList：" + providerUserList);
         // 账号不存在
-        if (systemAdminList == null || systemAdminList.size() == 0) {
+        if (providerUserList == null || providerUserList.size() == 0) {
             log.error("用户不存在，用户名：" + token.getUsername());
             throw new UnknownAccountException();
         }
         // 账号名重复
-        if (systemAdminList.size() > 1) {
+        if (providerUserList.size() > 1) {
             log.error("用户重复，用户名：" + token.getUsername());
             return null;
         }
 
-        SystemAdmin systemAdmin = systemAdminList.get(0);
-
+        ProviderUser providerUser = providerUserList.get(0);
+        
         // 账号未启用
-        if (systemAdmin.getStatus() != 1) {
+        if (providerUser.getState() == null || providerUser.getState().intValue() != 1) {
             log.error("用户账号已停用，用户名：" + token.getUsername());
             throw new DisabledAccountException();
         }
         // 认证缓存信息
-        return new SimpleAuthenticationInfo(systemAdmin, systemAdmin.getPassword().toCharArray(),
+        return new SimpleAuthenticationInfo(providerUser, providerUser.getPassword().toCharArray(),
             getName());
 
     }
@@ -87,14 +88,14 @@ public class MyShiroRealm extends AuthorizingRealm{
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
         log.info("---------------------doGetAuthorizationInfo start" + new Date());
-        SystemAdmin systemAdmin = (SystemAdmin) principals.getPrimaryPrincipal();
+        ProviderUser providerUser = (ProviderUser) principals.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> urlSet = new HashSet<String>();
         
         try{
             List<String> resourceList = systemResourcesService
-                    .getResourceByRoleId(systemAdmin.getRoleId(), SystemResources.S_ADMIN);	
+                    .getResourceByRoleId(providerUser.getProviderRolesId(), SystemResources.S_PROVIDER);	
             
             if (resourceList == null || resourceList.size() == 0) {
                 log.error("该用户所属角色没有任何权限");
@@ -115,7 +116,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 //                            if(urlSplit.indexOf(":") == -1){
 //                                urlSplit = urlSplit + ":read";
 //                            }
-//                            log.info(urlSplit);
+                            log.info("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" + urlSplit);
                             urlSet.add(urlSplit);
                         }
                     }
@@ -124,6 +125,8 @@ public class MyShiroRealm extends AuthorizingRealm{
         }catch(Exception e){
         	log.error(e);
         }
+        
+        System.out.println("shiro中该providerUser用户的权限集合:" + urlSet);
         info.addStringPermissions(urlSet);
         log.info("---------------------doGetAuthorizationInfo end" + new Date());
 

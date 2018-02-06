@@ -15,15 +15,18 @@ import com.lzl.common.Pager;
  */
 public interface IProviderUserService {
 	
-	List<ProviderUser> get(Map<String, Object> queryMap, Pager pager);
+	List<ProviderUser> get(Map<String, Object> queryMap, Pager pager) throws Exception;
 	
-	Integer getCount(Map<String, Object> queryMap);
+	Integer getCount(Map<String, Object> queryMap) throws Exception;
 
-    Boolean post(ProviderUser providerUser);
+    Boolean post(ProviderUser providerUser) throws Exception;
 	
-	Boolean put(ProviderUser providerUser);
+	Boolean put(ProviderUser providerUser) throws Exception;
 
-	Boolean deleteProviderUserById(Integer providerUserId);
+	Boolean deleteProviderUserById(Integer providerUserId) throws Exception;
 
-	List<ProviderUser> getProviderUserByName(String username);
+	List<ProviderUser> getProviderUserByName(String username) throws Exception;
+	
+	ProviderUser getById(Integer providerUserId) throws Exception;
+
 }

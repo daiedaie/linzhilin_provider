@@ -17,6 +17,7 @@ public class ResourceCheckFilter extends AccessControlFilter {
                                       Object mappedValue) throws Exception {
         Subject subject = getSubject(request, response);
         String url = getPathWithinApplication(request);
+        System.out.println("前台请求的url : " + url);
         if (url != null) {
             if(url.endsWith("/")){
                 // 截去url最后一个/
@@ -32,8 +33,9 @@ public class ResourceCheckFilter extends AccessControlFilter {
         
         url = url + ":" + method;
         
-//        System.out.println("*************************** "+url);
-        
+        System.out.println("*************************** "+url);
+        System.out.println("=========subject.isPermitted(url)==========" + subject.isPermitted(url));
+        System.out.println("==========subject.getPrincipal()============" + subject.getPrincipal());
         return subject.isAuthenticated() && subject.isPermitted(url);
     }
     

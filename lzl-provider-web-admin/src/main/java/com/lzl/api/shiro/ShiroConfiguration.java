@@ -49,8 +49,8 @@ public class ShiroConfiguration {
 		// 对响应头进行CORS授权
 		MyCorsRegistration corsRegistration = new MyCorsRegistration("*");
 		List<String> allowedOrigins = new ArrayList<>();
-		allowedOrigins.add("http://localhost:8080");
 		allowedOrigins.add("http://localhost:8088");
+		allowedOrigins.add("http://localhost:8080");
 		String[] objects = allowedOrigins.toArray(new String[allowedOrigins.size()]);
 
 		corsRegistration
@@ -118,7 +118,7 @@ public class ShiroConfiguration {
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		filterChainDefinitionMap.put("/login", "anon");
 		filterChainDefinitionMap.put("/", "anon");
-		filterChainDefinitionMap.put("/systemAdmin/login", "anon");
+		filterChainDefinitionMap.put("/providerUser/login", "anon");
 		filterChainDefinitionMap.put("/exit", "anon");
 		filterChainDefinitionMap.put("/unauth", "anon");
 	    filterChainDefinitionMap.put("/tologin", "anon");

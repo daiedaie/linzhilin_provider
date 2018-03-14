@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.refund.RefundWriteDao">
+	
+	<insert id="post">
+		insert into refund (refund_id,type,order_sn,goods_money,tax_money,express_money,refund_express_money,money_back,invoice_status,refund_mode,apply_status,consignee,apply_time,finish_time,remark )
+		values (#{refundId},#{type},#{orderSn},#{goodsMoney},#{taxMoney},#{expressMoney},#{refundExpressMoney},#{moneyBack},#{invoiceStatus},#{refundMode},#{applyStatus},#{consignee},#{applyTime},#{finishTime},#{remark})
+	</insert>
+
+    <update id="put">
+        update refund
+        <set>
+			<if test="refundId != null and refundId !=''">
+			refund_id = #{refundId},
+			</if>	
+			<if test="type != null and type !=''">
+			type = #{type},
+			</if>	
+			<if test="orderSn != null and orderSn !=''">
+			order_sn = #{orderSn},
+			</if>	
+			<if test="goodsMoney != null and goodsMoney !=''">
+			goods_money = #{goodsMoney},
+			</if>	
+			<if test="taxMoney != null and taxMoney !=''">
+			tax_money = #{taxMoney},
+			</if>	
+			<if test="expressMoney != null and expressMoney !=''">
+			express_money = #{expressMoney},
+			</if>	
+			<if test="refundExpressMoney != null and refundExpressMoney !=''">
+			refund_express_money = #{refundExpressMoney},
+			</if>	
+			<if test="moneyBack != null and moneyBack !=''">
+			money_back = #{moneyBack},
+			</if>	
+			<if test="invoiceStatus != null and invoiceStatus !=''">
+			invoice_status = #{invoiceStatus},
+			</if>	
+			<if test="refundMode != null and refundMode !=''">
+			refund_mode = #{refundMode},
+			</if>	
+			<if test="applyStatus != null and applyStatus !=''">
+			apply_status = #{applyStatus},
+			</if>	
+			<if test="consignee != null and consignee !=''">
+			consignee = #{consignee},
+			</if>	
+			<if test="applyTime != null and applyTime !=''">
+			apply_time = #{applyTime},
+			</if>	
+			<if test="finishTime != null and finishTime !=''">
+			finish_time = #{finishTime},
+			</if>	
+			<if test="remark != null and remark !=''">
+			remark = #{remark},
+			</if>	
+        </set>
+        where refund_id = #{refundId} 
+    </update>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.repository.RepositoryWriteDao">
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from repository
+		where repository_id = #{repositoryId}
+	</delete>
+	
+	<delete id="deleteChildrenByIds" parameterType="java.util.List"> 
+		delete from repository
+		where repository_id in 
+		<foreach collection="childrenIds" item="childrenId" index="index" open="(" close=")" separator=",">
+			#{childrenId}
+		</foreach>
+	</delete>
+	
+	<insert id="post">
+		insert into repository (repository_id,repository_name,provider_id,address,real_virtual,status,available,level_type,create_time,modify_time )
+		values (#{repositoryId},#{repositoryName},#{providerId},#{address},#{realVirtual},#{status},#{available},#{levelType},now(),now())
+	</insert>
+
+    <update id="put">
+        update repository
+        <set>
+			<if test="repositoryId != null and repositoryId !=''">
+			repository_id = #{repositoryId},
+			</if>	
+			<if test="repositoryName != null and repositoryName !=''">
+			repository_name = #{repositoryName},
+			</if>	
+			<if test="providerId != null and providerId !=''">
+			provider_id = #{providerId},
+			</if>	
+			<if test="address != null and address !=''">
+			address = #{address},
+			</if>	
+			<if test="realVirtual != null">
+			real_virtual = #{realVirtual},
+			</if>	
+			<if test="status != null and status !=''">
+			status = #{status},
+			</if>	
+			<if test="available != null">
+			available = #{available},
+			</if>	
+			<if test="levelType != null and levelType !=''">
+			level_type = #{levelType},
+			</if>	
+			modify_time = now(),
+        </set>
+        where repository_id = #{repositoryId} 
+    </update>
+
+</mapper>

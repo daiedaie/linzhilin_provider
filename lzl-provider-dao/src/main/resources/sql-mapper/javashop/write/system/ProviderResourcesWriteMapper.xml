@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.system.ProviderResourcesWriteDao">
+	
+	<insert id="post" useGeneratedKeys="true" keyProperty="id">
+		insert into provider_resources (pid,url,content,create_time,type,status,scope,res_id,res_icon )
+		values (#{pid},#{url},#{content},now(),#{type},1,#{scope},#{resId},#{resIcon})
+	</insert>
+
+    <update id="put">
+        update provider_resources
+        <set>
+			<if test="pid != null">
+			pid = #{pid},
+			</if>
+			<if test="url != null and url !=''">
+			url = #{url},
+			</if>
+			<if test="content != null and content !=''">
+			content = #{content},
+			</if>
+			<if test="type != null and type !=''">
+			type = #{type},
+			</if>
+			<if test="status != null and status !=''">
+			status = #{status},
+			</if>
+			<if test="scope != null and scope !=''">
+			scope = #{scope},
+			</if>
+			<if test="resId != null and resId !=''">
+			res_id = #{resId},
+			</if>
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

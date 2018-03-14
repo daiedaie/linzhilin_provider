@@ -42,7 +42,7 @@ public class PrimaryDataSourceConfig {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver()
-				.getResources("classpath:sql-mapper/javashop/write/*.xml"));
+				.getResources("classpath:sql-mapper/javashop/write/*/*.xml"));
 		return bean.getObject();
 	}
 

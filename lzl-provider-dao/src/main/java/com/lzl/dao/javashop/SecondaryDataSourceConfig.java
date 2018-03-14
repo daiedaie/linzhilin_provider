@@ -39,7 +39,7 @@ public class SecondaryDataSourceConfig {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver()
-				.getResources("classpath:sql-mapper/javashop/read/*.xml"));
+				.getResources("classpath:sql-mapper/javashop/read/*/*.xml"));
 		SqlSessionFactory sqlSessionFactory = bean.getObject();
 		sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);// 开启驼峰映射
 		sqlSessionFactory.getConfiguration().setCacheEnabled(true);

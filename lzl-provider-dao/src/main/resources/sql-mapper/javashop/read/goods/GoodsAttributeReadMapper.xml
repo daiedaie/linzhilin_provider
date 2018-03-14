@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.goods.GoodsAttributeReadDao">
+
+	<sql id="Base_Column_List" >
+		goods_attribute_id,goods_attribute_name,goods_type_id,cost_calculate_method,tax_rate_id,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.goods.GoodsAttribute">
+        select <include refid="Base_Column_List"/>
+		from goods_attribute
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from goods_attribute
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="goodsAttributeId != null and goodsAttributeId !=''">
+			and goods_attribute_id = #{goodsAttributeId}
+			</if>
+			<if test="goodsAttributeName != null and goodsAttributeName !=''">
+			and goods_attribute_name = #{goodsAttributeName}
+			</if>
+			<if test="goodsTypeId != null and goodsTypeId !=''">
+			and goods_type_id = #{goodsTypeId}
+			</if>
+			<if test="costCalculateMethod != null and costCalculateMethod !=''">
+			and cost_calculate_method = #{costCalculateMethod}
+			</if>
+			<if test="taxRateId != null and taxRateId !=''">
+			and tax_rate_id = #{taxRateId}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

@@ -30,7 +30,8 @@ public class JacksonUtil {
         return objectMapper.writeValueAsString(obj);
     }
     
-    public static  <T> Map<String, Object> obj2map(Object obj) throws Exception {
+    @SuppressWarnings("unchecked")
+	public static  <T> Map<String, Object> obj2map(Object obj) throws Exception {
     	if(null == obj){
         	throw new Exception("obj为null不能转json");
         }

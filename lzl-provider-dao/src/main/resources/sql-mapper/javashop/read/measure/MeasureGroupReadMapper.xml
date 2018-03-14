@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.measure.MeasureGroupReadDao">
+
+	<sql id="Base_Column_List" >
+		measure_group_id,measure_group_name,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.measure.MeasureGroup">
+        select <include refid="Base_Column_List"/>
+		from measure_group
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from measure_group
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="measureGroupId != null and measureGroupId !=''">
+			and measure_group_id = #{measureGroupId}
+			</if>
+			<if test="measureGroupName != null and measureGroupName !=''">
+			and measure_group_name = #{measureGroupName}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

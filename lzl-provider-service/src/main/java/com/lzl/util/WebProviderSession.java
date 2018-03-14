@@ -3,7 +3,7 @@ package com.lzl.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.lzl.bean.javashop.ProviderUser;
+import com.lzl.bean.javashop.system.ProviderUser;
 
 /**
  * 平台Session管理

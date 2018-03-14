@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.system.ProviderResourcesReadDao">
+
+	<sql id="Base_Column_List">
+		id,pid,url,content,create_time,type,status,scope,res_id,res_icon
+	</sql>
+
+	<select id="get" parameterType="java.util.Map"
+		resultType="com.lzl.bean.javashop.system.ProviderResources">
+		select
+		<include refid="Base_Column_List" />,content as title
+		from provider_resources
+		<include refid="Where_Clause" />
+		<!-- 
+		此处不能分页的原因是前台页面并未进行分页显示，若此处分页，就会导致前台显示的数据不全 
+		因为此处查询到的是第一页的数据，只将第一页的数据传递给前台了。
+		-->
+		<!-- <if test="size != null and size &gt; 0">limit #{start},#{size}</if> -->
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+		select count(*)
+		from provider_resources
+		<include refid="Where_Clause" />
+	</select>
+
+	<sql id="Where_Clause">
+		<where>
+			<if test="id != null and id !=''">
+				and id = #{id}
+			</if>
+			<if test="pid != null">
+				and pid = #{pid}
+			</if>
+			<if test="url != null and url !=''">
+				and url = #{url}
+			</if>
+			<if test="content != null and content !=''">
+				and content = #{content}
+			</if>
+			<if test="type != null and type !=''">
+				and type = #{type}
+			</if>
+			<if test="status != null and status !=''">
+				and status = #{status}
+			</if>
+			<if test="scope != null and scope !=''">
+				and scope = #{scope}
+			</if>
+			<if test="resId != null and resId !=''">
+				and res_id = #{resId}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 用户登录查询权限 -->
+	<select id="getResourceByRoleId" resultType="java.lang.String">
+		select t1.url from `provider_resources` t1
+		where t1.id in(select t2.system_resources_id from `provider_resources_roles` t2 where t2.provider_roles_id = #{roleId})
+		and t1.scope=#{scope}
+		and t1.status=1
+		order by id
+	</select>		
+	
+	<!-- 查询角色权限id -->
+	<select id="getResourceIdByRoleId" resultType="java.lang.Integer">
+		select t1.id from `system_resources` t1
+		where t1.id in(select t2.system_resources_id from `provider_resources_roles` t2 where t2.provider_roles_id = #{roleId})
+		and t1.scope=#{scope}
+		and t1.status=1
+		order by id
+	</select>
+	
+	<!-- 查询资源的父资源ID -->
+	<select id="getParentResourceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select t1.id from `provider_resources` t1
+		where t1.id in(select t2.pid from `provider_resources` t2 where t2.id = #{childResourceId})
+		and t1.status=1
+		order by id
+	</select>
+
+</mapper>

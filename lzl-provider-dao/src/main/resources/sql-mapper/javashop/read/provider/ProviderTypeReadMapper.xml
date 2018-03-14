@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.provider.ProviderTypeReadDao">
+
+	<sql id="Base_Column_List" >
+		provider_type_id,provider_type_name,create_time,modify_time 
+	</sql>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.provider.ProviderType">
+        select <include refid="Base_Column_List"/>
+		from provider_type
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from provider_type
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="providerTypeId != null and providerTypeId !=''">
+			and provider_type_id = #{providerTypeId}
+			</if>
+			<if test="providerTypeName != null and providerTypeName !=''">
+			and provider_type_name = #{providerTypeName}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

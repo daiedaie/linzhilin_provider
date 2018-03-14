@@ -25,17 +25,17 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.util.StringUtils;
 
-import com.lzl.bean.javashop.ProviderUser;
-import com.lzl.bean.javashop.SystemResources;
-import com.lzl.service.IProviderUserService;
-import com.lzl.service.ISystemResourcesService;
+import com.lzl.bean.javashop.system.ProviderResources;
+import com.lzl.bean.javashop.system.ProviderUser;
+import com.lzl.service.system.IProviderResourcesService;
+import com.lzl.service.system.IProviderUserService;
 
 public class MyShiroRealm extends AuthorizingRealm{
 
     private final Logger log = LogManager.getLogger(this.getClass());
 
     @Resource
-    private ISystemResourcesService systemResourcesService;
+    private IProviderResourcesService providerResourcesService;
     @Resource
     private IProviderUserService providerUserService;
 
@@ -94,8 +94,8 @@ public class MyShiroRealm extends AuthorizingRealm{
         Set<String> urlSet = new HashSet<String>();
         
         try{
-            List<String> resourceList = systemResourcesService
-                    .getResourceByRoleId(providerUser.getProviderRolesId(), SystemResources.S_PROVIDER);	
+            List<String> resourceList = providerResourcesService
+                    .getResourceByRoleId(providerUser.getProviderRolesId(), ProviderResources.S_PROVIDER);	
             
             if (resourceList == null || resourceList.size() == 0) {
                 log.error("该用户所属角色没有任何权限");

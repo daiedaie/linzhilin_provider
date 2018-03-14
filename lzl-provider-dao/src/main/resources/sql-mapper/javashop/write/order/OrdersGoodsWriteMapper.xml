@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.write.order.OrdersGoodsWriteDao">
+	
+	<insert id="post">
+		insert into orders_goods (id,orders_id,orders_sn,provider_id,pic,goods_cate_id,goods_brand_id,goods_id,product_goods_id,spec_info,goods_name,goods_sku,is_gift,gift_id,money_price,number,seller_id,package_groups_id,mall_groups_id,money_amount,money_act_single,act_single_id,activity_id,act_flash_sale_id,act_flash_sale_product_id,logistics_id,logistics_name,logistics_number,shipping_time,close_time,system_remark,member_product_back_id,member_product_exchange_id,status,create_time,update_time )
+		values (#{id},#{ordersId},#{ordersSn},#{providerId},#{pic},#{goodsCateId},#{goodsBrandId},#{goodsId},#{productGoodsId},#{specInfo},#{goodsName},#{goodsSku},#{isGift},#{giftId},#{moneyPrice},#{number},#{sellerId},#{packageGroupsId},#{mallGroupsId},#{moneyAmount},#{moneyActSingle},#{actSingleId},#{activityId},#{actFlashSaleId},#{actFlashSaleProductId},#{logisticsId},#{logisticsName},#{logisticsNumber},#{shippingTime},#{closeTime},#{systemRemark},#{memberProductBackId},#{memberProductExchangeId},#{status},#{createTime},#{updateTime})
+	</insert>
+
+    <update id="put">
+        update orders_goods
+        <set>
+			<if test="id != null and id !=''">
+			id = #{id},
+			</if>	
+			<if test="ordersId != null and ordersId !=''">
+			orders_id = #{ordersId},
+			</if>	
+			<if test="ordersSn != null and ordersSn !=''">
+			orders_sn = #{ordersSn},
+			</if>	
+			<if test="providerId != null and providerId !=''">
+			provider_id = #{providerId},
+			</if>	
+			<if test="pic != null and pic !=''">
+			pic = #{pic},
+			</if>	
+			<if test="goodsCateId != null and goodsCateId !=''">
+			goods_cate_id = #{goodsCateId},
+			</if>	
+			<if test="goodsBrandId != null and goodsBrandId !=''">
+			goods_brand_id = #{goodsBrandId},
+			</if>	
+			<if test="goodsId != null and goodsId !=''">
+			goods_id = #{goodsId},
+			</if>	
+			<if test="productGoodsId != null and productGoodsId !=''">
+			product_goods_id = #{productGoodsId},
+			</if>	
+			<if test="specInfo != null and specInfo !=''">
+			spec_info = #{specInfo},
+			</if>	
+			<if test="goodsName != null and goodsName !=''">
+			goods_name = #{goodsName},
+			</if>	
+			<if test="goodsSku != null and goodsSku !=''">
+			goods_sku = #{goodsSku},
+			</if>	
+			<if test="isGift != null and isGift !=''">
+			is_gift = #{isGift},
+			</if>	
+			<if test="giftId != null and giftId !=''">
+			gift_id = #{giftId},
+			</if>	
+			<if test="moneyPrice != null and moneyPrice !=''">
+			money_price = #{moneyPrice},
+			</if>	
+			<if test="number != null and number !=''">
+			number = #{number},
+			</if>	
+			<if test="sellerId != null and sellerId !=''">
+			seller_id = #{sellerId},
+			</if>	
+			<if test="packageGroupsId != null and packageGroupsId !=''">
+			package_groups_id = #{packageGroupsId},
+			</if>	
+			<if test="mallGroupsId != null and mallGroupsId !=''">
+			mall_groups_id = #{mallGroupsId},
+			</if>	
+			<if test="moneyAmount != null and moneyAmount !=''">
+			money_amount = #{moneyAmount},
+			</if>	
+			<if test="moneyActSingle != null and moneyActSingle !=''">
+			money_act_single = #{moneyActSingle},
+			</if>	
+			<if test="actSingleId != null and actSingleId !=''">
+			act_single_id = #{actSingleId},
+			</if>	
+			<if test="activityId != null and activityId !=''">
+			activity_id = #{activityId},
+			</if>	
+			<if test="actFlashSaleId != null and actFlashSaleId !=''">
+			act_flash_sale_id = #{actFlashSaleId},
+			</if>	
+			<if test="actFlashSaleProductId != null and actFlashSaleProductId !=''">
+			act_flash_sale_product_id = #{actFlashSaleProductId},
+			</if>	
+			<if test="logisticsId != null and logisticsId !=''">
+			logistics_id = #{logisticsId},
+			</if>	
+			<if test="logisticsName != null and logisticsName !=''">
+			logistics_name = #{logisticsName},
+			</if>	
+			<if test="logisticsNumber != null and logisticsNumber !=''">
+			logistics_number = #{logisticsNumber},
+			</if>	
+			<if test="shippingTime != null and shippingTime !=''">
+			shipping_time = #{shippingTime},
+			</if>	
+			<if test="closeTime != null and closeTime !=''">
+			close_time = #{closeTime},
+			</if>	
+			<if test="systemRemark != null and systemRemark !=''">
+			system_remark = #{systemRemark},
+			</if>	
+			<if test="memberProductBackId != null and memberProductBackId !=''">
+			member_product_back_id = #{memberProductBackId},
+			</if>	
+			<if test="memberProductExchangeId != null and memberProductExchangeId !=''">
+			member_product_exchange_id = #{memberProductExchangeId},
+			</if>	
+			<if test="status != null and status !=''">
+			status = #{status},
+			</if>	
+			<if test="createTime != null and createTime !=''">
+			create_time = #{createTime},
+			</if>	
+			<if test="updateTime != null and updateTime !=''">
+			update_time = #{updateTime},
+			</if>	
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

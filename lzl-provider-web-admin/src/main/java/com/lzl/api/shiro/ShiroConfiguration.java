@@ -129,6 +129,11 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/v2/api-docs", "anon");
 		filterChainDefinitionMap.put("/configuration/security", "anon");
 		filterChainDefinitionMap.put("/configuration/ui", "anon");
+		filterChainDefinitionMap.put("/**/service", "anon");
+		filterChainDefinitionMap.put("/**/refund-money", "anon");
+		filterChainDefinitionMap.put("/**/refund-goods", "anon");
+		filterChainDefinitionMap.put("/**/change-goods", "anon");
+		filterChainDefinitionMap.put("/**/refund-money-goods", "anon");
 		
 		filterChainDefinitionMap.put("/**", "authc");
 

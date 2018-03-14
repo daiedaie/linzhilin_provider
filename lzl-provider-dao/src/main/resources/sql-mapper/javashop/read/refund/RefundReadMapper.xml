@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.refund.RefundReadDao">
+
+	<sql id="Base_Column_List" >
+		refund_id,type,order_sn,goods_money,tax_money,express_money,refund_express_money,money_back,invoice_status,refund_mode,apply_status,consignee,apply_time,finish_time,remark 
+	</sql>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.refund.Refund">
+        select <include refid="Base_Column_List" />
+		from refund
+		where refund_id = #{refundId} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.refund.Refund">
+        select <include refid="Base_Column_List" />
+		from refund
+        <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from refund
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="refundId != null and refundId !=''">
+			and refund_id = #{refundId}
+			</if>
+			<if test="type != null and type !=''">
+			and type = #{type}
+			</if>
+			<if test="orderSn != null and orderSn !=''">
+			and order_sn like CONCAT('%', TRIM(#{orderSn}), '%')
+			</if>
+			<if test="goodsMoney != null and goodsMoney !=''">
+			and goods_money = #{goodsMoney}
+			</if>
+			<if test="taxMoney != null and taxMoney !=''">
+			and tax_money = #{taxMoney}
+			</if>
+			<if test="expressMoney != null and expressMoney !=''">
+			and express_money = #{expressMoney}
+			</if>
+			<if test="refundExpressMoney != null and refundExpressMoney !=''">
+			and refund_express_money = #{refundExpressMoney}
+			</if>
+			<if test="moneyBack != null and moneyBack !=''">
+			and money_back = #{moneyBack}
+			</if>
+			<if test="invoiceStatus != null and invoiceStatus !=''">
+			and invoice_status = #{invoiceStatus}
+			</if>
+			<if test="refundMode != null and refundMode !=''">
+			and refund_mode = #{refundMode}
+			</if>
+			<if test="applyStatus != null and applyStatus !=''">
+			and apply_status = #{applyStatus}
+			</if>
+			<if test="consignee != null and consignee !=''">
+			and consignee = #{consignee}
+			</if>
+			<if test="startTime != null and startTime != ''">
+			and apply_time &gt;= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+			and apply_time &lt;= #{endTime}
+			</if>
+			<!-- <if test="applyTime != null and applyTime !=''">
+			and apply_time = #{applyTime}
+			</if> -->
+			<if test="finishTime != null and finishTime !=''">
+			and finish_time = #{finishTime}
+			</if>
+			<if test="remark != null and remark !=''">
+			and remark = #{remark}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

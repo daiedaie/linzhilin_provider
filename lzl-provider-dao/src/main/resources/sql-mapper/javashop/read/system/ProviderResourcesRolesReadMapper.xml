@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzl.dao.javashop.read.system.ProviderResourcesRolesReadDao">
+
+	<sql id="Base_Column_List" >
+		id,system_resources_id,provider_roles_id,create_time,modify_time 
+	</sql>
+	
+	<sql id="Base_ProviderResources_Column_List">
+		id,pid,url,content,create_time,type,status,scope,res_id,res_icon
+	</sql>
+	
+	<select id="getResourceByRoleId" resultType="com.lzl.bean.javashop.system.ProviderResources">
+		select <include refid="Base_ProviderResources_Column_List"/> 
+		from `provider_resources` t1
+        where t1.id in(select t2.system_resources_id from `provider_resources_roles` t2 where t2.provider_roles_id = #{providerRolesId})
+        and t1.scope=#{scope}
+        order by id
+	</select>
+	
+	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.system.ProviderResourcesRoles">
+        select <include refid="Base_Column_List"/>
+		from provider_resources_roles
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+        select count(*)
+		from provider_resources_roles
+        <include refid="Where_Clause"/>
+    </select>
+	
+	<sql id="Where_Clause">
+        <where>
+			<if test="id != null and id !=''">
+			and id = #{id}
+			</if>
+			<if test="systemResourcesId != null and systemResourcesId !=''">
+			and system_resources_id = #{systemResourcesId}
+			</if>
+			<if test="providerRolesId != null and providerRolesId !=''">
+			and provider_roles_id = #{providerRolesId}
+			</if>
+			<if test="createTime != null and createTime !=''">
+			and create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime !=''">
+			and modify_time = #{modifyTime}
+			</if>
+        </where>
+    </sql>
+
+</mapper>

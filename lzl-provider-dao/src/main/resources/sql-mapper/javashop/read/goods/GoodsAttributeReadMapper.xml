@@ -3,13 +3,20 @@
 <mapper namespace="com.lzl.dao.javashop.read.goods.GoodsAttributeReadDao">
 
 	<sql id="Base_Column_List" >
-		goods_attribute_id,goods_attribute_name,goods_type_id,cost_calculate_method,tax_rate_id,create_time,modify_time 
+		goods_attribute_id,goods_attribute_name,goods_type_id,cost_calculate_method,tax_rate_id,status,create_time,modify_time 
 	</sql>
-	
-	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.goods.GoodsAttribute">
-        select <include refid="Base_Column_List"/>
+
+    <select id="getById" parameterType="Integer" resultType="com.lzl.bean.javashop.goods.GoodsAttribute">
+        select <include refid="Base_Column_List" />
+		from goods_attribute
+		where goods_attribute_id = #{goodsAttributeId} 
+    </select>
+
+    <select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.goods.GoodsAttribute">
+        select <include refid="Base_Column_List" />
 		from goods_attribute
         <include refid="Where_Clause"/>
+		<if test="size != null and size &gt; 0">limit #{start},#{size}</if>
     </select>
 	
 	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
@@ -34,6 +41,9 @@
 			</if>
 			<if test="taxRateId != null and taxRateId !=''">
 			and tax_rate_id = #{taxRateId}
+			</if>
+			<if test="status != null and status !=''">
+			and status = #{status}
 			</if>
 			<if test="createTime != null and createTime !=''">
 			and create_time = #{createTime}

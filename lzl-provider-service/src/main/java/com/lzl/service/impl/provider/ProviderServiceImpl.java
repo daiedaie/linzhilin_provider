@@ -1,5 +1,6 @@
 package com.lzl.service.impl.provider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,17 @@ public class ProviderServiceImpl implements IProviderService{
 	public Boolean deleteProviderById(Integer providerId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Provider> getProviderForProviderOrders(Map<String, Object> queryMap) {
+		String idsStr = (String)queryMap.get("idsStr");
+		String[] idsArr = idsStr.split(",");
+		List<Integer> idsList = new ArrayList<>();
+		for(String id : idsArr){
+			idsList.add(Integer.parseInt(id));
+		}
+		return providerReadDao.getRepositoryForProviderOrders(idsList);
 	}
 	
 }

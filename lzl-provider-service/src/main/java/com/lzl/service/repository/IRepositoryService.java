@@ -3,6 +3,8 @@ package com.lzl.service.repository;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.MultiValueMap;
+
 import com.lzl.bean.javashop.repository.Repository;
 import com.lzl.common.Pager;
 
@@ -22,5 +24,7 @@ public interface IRepositoryService {
     Boolean put(Repository repository) throws Exception;
     /**根据Id删除*/
     Boolean deleteById(Integer repositoryId);
+    
+    List<Repository> getRepositoryForProviderOrders(Map<String, Object> queryMap);
 
 }

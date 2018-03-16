@@ -4,12 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
  * @author:Lgq
  * @version:1.0
  * @since:1.0
  * @createTime:2018-03-13 13:34:06
  */
+/**
+ * 商品分类
+Include.NON_EMPTY 属性为 空（“”） 或者为 NULL 都不序列化
+Include.NON_NULL 属性为NULL 不序列化
+网络传输需要序列化，固态到磁盘也需要序列化
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class GoodsCate implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -62,14 +70,41 @@ public class GoodsCate implements Serializable{
 
     //*******************额外属性***********************
     private List<GoodsCate> children;
+    private Boolean loading;
     /** 0、默认；1、提交审核；2、审核通过；3、审核失败；4、停用 */
     private String statusStr;
     /** 级别：1：一级；2：二级；3：三级（可扩展） */
     private String gradeStr;
     
+    private Integer value;
+    private String label;
     
     
-    public String getGradeStr() {
+    public Boolean getLoading() {
+		return loading;
+	}
+
+	public void setLoading(Boolean loading) {
+		this.loading = loading;
+	}
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getGradeStr() {
 		return gradeStr;
 	}
 

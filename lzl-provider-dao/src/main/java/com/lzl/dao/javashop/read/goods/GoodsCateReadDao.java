@@ -2,6 +2,9 @@ package com.lzl.dao.javashop.read.goods;
 
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lzl.bean.javashop.goods.GoodsCate;
 /**
  * @author:Lgq
@@ -19,5 +22,6 @@ public interface GoodsCateReadDao {
 	/**获取一级分类*/
 	List<GoodsCate> getTopLevel();
 	List<GoodsCate> getGoodsCateChildren(Integer id);
+	List<GoodsCate> getChildren(@Param("parentId")Integer parentId);
 
 }

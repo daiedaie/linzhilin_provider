@@ -15,5 +15,7 @@ public interface ProviderReadDao {
 	List<Provider> get(Map<String, Object> queryMap);
 	
 	Integer getCount(Map<String, Object> queryMap);
+
+	List<Provider> getRepositoryForProviderOrders(List<Integer> list);
 	
 }

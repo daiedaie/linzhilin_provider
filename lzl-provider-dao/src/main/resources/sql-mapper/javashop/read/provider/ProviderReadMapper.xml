@@ -14,7 +14,14 @@
         	limit #{startIndex}, #{endIndex}
         </if>
     </select>
-	
+	<select id="getRepositoryForProviderOrders" parameterType="java.util.List" resultType="com.lzl.bean.javashop.provider.Provider">
+		select <include refid="Base_Column_List"/>
+		from provider
+		where provider_id in 
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
 	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
         select count(*)
 		from provider

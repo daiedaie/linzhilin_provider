@@ -18,5 +18,7 @@ public interface RepositoryReadDao {
 	Integer getCount(Map<String, Object> queryMap);
 	/**查询子仓库*/
 	List<Repository> getChildrenById(Integer repositoryId);
+	
+	List<Repository> getRepositoryForProviderOrders(List<Integer> list);
 
 }

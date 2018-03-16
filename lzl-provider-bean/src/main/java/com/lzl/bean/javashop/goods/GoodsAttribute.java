@@ -1,11 +1,13 @@
 package com.lzl.bean.javashop.goods;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * @author:Lgq
  * @version:1.0
  * @since:1.0
- * @createTime:2018-01-16 13:05:02
+ * @createTime:2018-03-14 14:31:18
  */
 public class GoodsAttribute implements Serializable{
 
@@ -26,10 +28,15 @@ public class GoodsAttribute implements Serializable{
     /** 税率ID */
     private java.lang.Integer taxRateId;
 
+    /** 状态 1.正常使用 2.已废弃 */
+    private Integer status;
+
     /** 创建时间 */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone="GMT+8")
     private java.util.Date createTime;
 
     /** 最后一次修改时间 */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone="GMT+8")
     private java.util.Date modifyTime;
 
 
@@ -68,6 +75,13 @@ public class GoodsAttribute implements Serializable{
     public java.lang.Integer getTaxRateId() {
         return this.taxRateId;
     }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getStatus() {
+        return this.status;
+    }
     public void setCreateTime(java.util.Date createTime) {
         this.createTime = createTime;
     }
@@ -85,6 +99,6 @@ public class GoodsAttribute implements Serializable{
 	
 	@Override
     public String toString() {
-		return  "GoodsAttributeId="  + goodsAttributeId +";"+  "GoodsAttributeName="  + goodsAttributeName +";"+  "GoodsTypeId="  + goodsTypeId +";"+  "CostCalculateMethod="  + costCalculateMethod +";"+  "TaxRateId="  + taxRateId +";"+  "CreateTime="  + createTime +";"+  "ModifyTime="  + modifyTime ; 
+		return  "GoodsAttributeId="  + goodsAttributeId +";"+  "GoodsAttributeName="  + goodsAttributeName +";"+  "GoodsTypeId="  + goodsTypeId +";"+  "CostCalculateMethod="  + costCalculateMethod +";"+  "TaxRateId="  + taxRateId +";"+  "Status="  + status +";"+  "CreateTime="  + createTime +";"+  "ModifyTime="  + modifyTime ; 
     }
 }

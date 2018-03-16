@@ -23,5 +23,7 @@ public interface IGoodsCateService {
     /**获取一级分类*/
     List<GoodsCate> getTopLevel();
 	Boolean deleteById(Integer id);
+	/**无条件获取所有商品分类 */
+	List<GoodsCate> getGoodsCateForAttribute(Map<String, Object> queryMap);
 
 }

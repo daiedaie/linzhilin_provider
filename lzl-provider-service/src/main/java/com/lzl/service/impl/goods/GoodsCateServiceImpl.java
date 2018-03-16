@@ -69,8 +69,32 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
         	}
         }
     }
-
-	/**新增*/
+    /**无条件获取所有商品分类*/
+    @Override
+	public List<GoodsCate> getGoodsCateForAttribute(Map<String, Object> queryMap) {
+    	if(queryMap.get("iviewCascader") != null){
+    		if(Integer.parseInt((String)queryMap.get("pid")) == 0){
+    			List<GoodsCate> parents = goodsCateReadDao.getTopLevel();
+    			for(GoodsCate goodsCate : parents){
+    				goodsCate.setValue(goodsCate.getId());
+    				goodsCate.setLabel(goodsCate.getName());
+    				goodsCate.setChildren(new ArrayList<GoodsCate>());
+    				goodsCate.setLoading(false);
+    			}
+    			return parents;
+    		}else{
+    			List<GoodsCate> children = goodsCateReadDao.getChildren(Integer.parseInt((String)queryMap.get("pid")));
+    			for(GoodsCate goodsCate : children){
+    				goodsCate.setValue(goodsCate.getId());
+    				goodsCate.setLabel(goodsCate.getName());
+    			}
+    			return children;
+    		}
+		}
+    	return null;
+	}
+	
+    /**新增*/
     public Boolean post(GoodsCate goodsCate) throws Exception {
         int result = goodsCateWriteDao.post(goodsCate);
         return result > 0 ;
@@ -152,6 +176,9 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 	
 	private void transferData(List<GoodsCate> goodsCates) {
     	for(GoodsCate goodsCate : goodsCates){
+    		//进行级联显示
+    		goodsCate.setValue(goodsCate.getId());
+    		goodsCate.setLabel(goodsCate.getName());
     		/** 状态 */
     		if(goodsCate.getStatus() != null){
     			Integer temp = goodsCate.getStatus();

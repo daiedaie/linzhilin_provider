@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 /**
  * @author:Lgq
  * @version:1.0
  * @since:1.0
  * @createTime:2018-03-12 10:28:45
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Repository implements Serializable{
 
     private static final long serialVersionUID = 1L;

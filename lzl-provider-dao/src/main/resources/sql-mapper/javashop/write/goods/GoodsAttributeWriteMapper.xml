@@ -2,26 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lzl.dao.javashop.write.goods.GoodsAttributeWriteDao">
 	
-	<delete id="deleteGoodsAttributeById" parameterType="java.lang.Integer">
-		delete from goods_attribute
-		where goods_attribute_id = #{goodsAttributeId}
-	</delete>
-	
 	<insert id="post">
-		insert into goods_attribute (goods_attribute_id,goods_attribute_name,goods_type_id,cost_calculate_method,tax_rate_id,create_time,modify_time )
-		values (#{goodsAttributeId},#{goodsAttributeName},#{goodsTypeId},#{costCalculateMethod},#{taxRateId},#{createTime},#{modifyTime})
+		insert into goods_attribute (goods_attribute_id,goods_attribute_name,goods_type_id,cost_calculate_method,tax_rate_id,status,create_time,modify_time )
+		values (#{goodsAttributeId},#{goodsAttributeName},#{goodsTypeId},#{costCalculateMethod},#{taxRateId},#{status},#{createTime},#{modifyTime})
 	</insert>
-	
-	 <update id="put">
+
+    <update id="put">
         update goods_attribute
         <set>
-				goods_attribute_id = #{goodsAttributeId},
-				goods_attribute_name = #{goodsAttributeName},
-				goods_type_id = #{goodsTypeId},
-				cost_calculate_method = #{costCalculateMethod},
-				tax_rate_id = #{taxRateId},
-				create_time = #{createTime},
-				modify_time = #{modifyTime},
+			<if test="goodsAttributeId != null and goodsAttributeId !=''">
+			goods_attribute_id = #{goodsAttributeId},
+			</if>	
+			<if test="goodsAttributeName != null and goodsAttributeName !=''">
+			goods_attribute_name = #{goodsAttributeName},
+			</if>	
+			<if test="goodsTypeId != null and goodsTypeId !=''">
+			goods_type_id = #{goodsTypeId},
+			</if>	
+			<if test="costCalculateMethod != null and costCalculateMethod !=''">
+			cost_calculate_method = #{costCalculateMethod},
+			</if>	
+			<if test="taxRateId != null and taxRateId !=''">
+			tax_rate_id = #{taxRateId},
+			</if>	
+			<if test="status != null and status !=''">
+			status = #{status},
+			</if>	
+			<if test="createTime != null and createTime !=''">
+			create_time = #{createTime},
+			</if>	
+			<if test="modifyTime != null and modifyTime !=''">
+			modify_time = #{modifyTime},
+			</if>	
         </set>
         where goods_attribute_id = #{goodsAttributeId} 
     </update>

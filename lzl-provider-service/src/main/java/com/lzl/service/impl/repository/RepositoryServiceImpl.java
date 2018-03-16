@@ -205,5 +205,15 @@ public class RepositoryServiceImpl implements IRepositoryService{
             throw e;
 		}
 	}
-
+	
+	@Override
+	public List<Repository> getRepositoryForProviderOrders(Map<String, Object> queryMap) {
+		String idsStr = (String)queryMap.get("idsStr");
+		String[] idsArr = idsStr.split(",");
+		List<Integer> idsList = new ArrayList<>();
+		for(String id : idsArr){
+			idsList.add(Integer.parseInt(id));
+		}
+		return repositoryReadDao.getRepositoryForProviderOrders(idsList);
+	}
 }

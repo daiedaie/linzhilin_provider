@@ -45,10 +45,16 @@ public class ProviderController extends BaseController {
     @ApiOperation(value="供应商列表", notes="必传： ；选传：page,size")
     @RequestMapping(method = { RequestMethod.GET })
     public ResponseEntity<List<Provider>> get(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		Pager pager = WebUtil.handlerPager(request);
-		ResponseEntity<List<Provider>> entity = new ResponseEntity<List<Provider>>(providerService.get((Map<String, Object>) request.getAttribute("QUERYMAP"),pager),HttpStatus.OK);
-		//response.setHeader("total", String.valueOf(pager.getRowsCount()));
-		return entity;
+		Map<String, Object> queryMap = (Map<String, Object>) request.getAttribute("QUERYMAP");
+		if(queryMap.get("idsStr") != null){
+			ResponseEntity<List<Provider>> entity = new ResponseEntity<List<Provider>>(providerService.getProviderForProviderOrders(queryMap),HttpStatus.OK);
+			return entity;
+		}else{
+			Pager pager = WebUtil.handlerPager(request);
+			ResponseEntity<List<Provider>> entity = new ResponseEntity<List<Provider>>(providerService.get(queryMap, pager),HttpStatus.OK);
+			//response.setHeader("total", String.valueOf(pager.getRowsCount()));
+			return entity;
+		}
     }
 	
 }

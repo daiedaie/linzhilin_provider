@@ -25,6 +25,15 @@
 		where level_type = #{repositoryId} 
 	</select>
 	
+	<select id="getRepositoryForProviderOrders" parameterType="java.util.List" resultType="com.lzl.bean.javashop.repository.Repository">
+		select <include refid="Base_Column_List" />
+		from repository
+		where repository_id in 
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
 	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
         select count(*)
 		from repository

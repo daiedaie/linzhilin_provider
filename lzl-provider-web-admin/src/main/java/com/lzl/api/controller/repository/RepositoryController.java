@@ -41,8 +41,15 @@ public class RepositoryController extends BaseController  {
     @ApiOperation(value="列表", notes="必传： ；选传：page,size")
     @RequestMapping(method = { RequestMethod.GET })
     public ResponseEntity<Object> get(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		ResponseEntity<Object> entity = new ResponseEntity<Object>(repositoryService.get((Map<String, Object>) request.getAttribute("QUERYMAP"),new Pager()),HttpStatus.OK);
-		return entity;
+		Map<String, Object> queryMap = (Map<String, Object>) request.getAttribute("QUERYMAP");
+		if(queryMap.get("idsStr") != null){
+			ResponseEntity<Object> entity = new ResponseEntity<Object>(repositoryService.getRepositoryForProviderOrders(queryMap),HttpStatus.OK);
+			System.out.println("getRepositoryForProviderOrders::entity::" + entity);
+			return entity;
+		}else{
+			ResponseEntity<Object> entity = new ResponseEntity<Object>(repositoryService.get(queryMap, null),HttpStatus.OK);
+			return entity;
+		}
     }
 	
 	@ApiOperation(value="列表", notes="必传： ；选传：page,size")

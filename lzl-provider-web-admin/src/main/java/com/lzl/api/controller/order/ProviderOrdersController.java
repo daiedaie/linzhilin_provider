@@ -17,6 +17,7 @@ import org.jeecgframework.poi.excel.ExcelExportUtil;
 import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +54,12 @@ public class ProviderOrdersController extends BaseController {
 		return entity;
 
 	}
+	@ApiOperation(value="供应商订单列表更新", notes="必传：repositoryId ；选传：")
+    @RequestMapping(method = { RequestMethod.PUT })
+    public ResponseEntity<Object> put(HttpServletRequest request,@RequestBody ProviderOrders providerOrders) throws Exception {
+		providerOrdersService.put(providerOrders);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+    }
 	
 	@SuppressWarnings("unchecked")
     @RequestMapping(value="/down",method = { RequestMethod.GET })

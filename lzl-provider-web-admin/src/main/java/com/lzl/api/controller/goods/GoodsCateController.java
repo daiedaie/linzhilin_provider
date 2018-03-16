@@ -52,6 +52,15 @@ public class GoodsCateController extends BaseController  {
 		ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.get((Map<String, Object>) request.getAttribute("QUERYMAP"),new Pager()),HttpStatus.OK);
 		return entity;
     }
+    
+    @SuppressWarnings("unchecked")
+	@ApiOperation(value="列表", notes="必传： ；选传：page,size")
+    @RequestMapping(value="/goodsCateForAttribute", method = { RequestMethod.GET })
+    public ResponseEntity<Object> getGoodsCateForAttribute(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    	Map<String,Object> queryMap = (Map<String, Object>) request.getAttribute("QUERYMAP");
+    	ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.getGoodsCateForAttribute(queryMap),HttpStatus.OK);
+    	return entity;
+    }
 
 	@ApiOperation(value="列表", notes="必传： ；选传：page,size")
 	@RequestMapping(value="/getTopLevel", method = { RequestMethod.GET })

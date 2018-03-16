@@ -25,4 +25,6 @@ public interface IProviderService {
 
 	Boolean deleteProviderById(Integer providerId);
 
+	List<Provider> getProviderForProviderOrders(Map<String, Object> queryMap);
+
 }

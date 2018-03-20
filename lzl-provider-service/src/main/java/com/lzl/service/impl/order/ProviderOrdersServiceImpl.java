@@ -54,8 +54,8 @@ public class ProviderOrdersServiceImpl implements IProviderOrdersService{
 
 	@Override
 	public Boolean post(ProviderOrders providerOrders) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int result = providerOrdersWriteDao.post(providerOrders);
+		return result > 0;
 	}
 
 	@Override

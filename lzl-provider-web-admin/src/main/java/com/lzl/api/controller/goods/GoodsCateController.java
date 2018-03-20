@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lzl.api.controller.BaseController;
 import com.lzl.bean.javashop.goods.GoodsCate;
-import com.lzl.common.Pager;
 import com.lzl.service.goods.IGoodsCateService;
 import com.lzl.util.MyProperties;
 import com.lzl.util.UploadUtils;
@@ -49,19 +48,16 @@ public class GoodsCateController extends BaseController  {
     @ApiOperation(value="列表", notes="必传： ；选传：page,size")
     @RequestMapping(method = { RequestMethod.GET })
     public ResponseEntity<Object> get(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.get((Map<String, Object>) request.getAttribute("QUERYMAP"),new Pager()),HttpStatus.OK);
-		return entity;
+    	Map<String, Object> queryMap = (Map<String, Object>) request.getAttribute("QUERYMAP");
+    	if(queryMap.get("cascaderGoodsCate") != null){
+    		ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.goodsCateOrGoods(queryMap), HttpStatus.OK);
+    		return entity;
+    	}else{
+			ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.get(queryMap,null),HttpStatus.OK);
+			return entity;
+		}
     }
     
-    @SuppressWarnings("unchecked")
-	@ApiOperation(value="列表", notes="必传： ；选传：page,size")
-    @RequestMapping(value="/goodsCateForAttribute", method = { RequestMethod.GET })
-    public ResponseEntity<Object> getGoodsCateForAttribute(HttpServletRequest request,HttpServletResponse response) throws Exception {
-    	Map<String,Object> queryMap = (Map<String, Object>) request.getAttribute("QUERYMAP");
-    	ResponseEntity<Object> entity = new ResponseEntity<Object>(goodsCateService.getGoodsCateForAttribute(queryMap),HttpStatus.OK);
-    	return entity;
-    }
-
 	@ApiOperation(value="列表", notes="必传： ；选传：page,size")
 	@RequestMapping(value="/getTopLevel", method = { RequestMethod.GET })
 	public ResponseEntity<Object> getTopLevel(HttpServletRequest request,HttpServletResponse response) throws Exception {

@@ -70,7 +70,8 @@ public class GoodsCate implements Serializable{
 
     //*******************额外属性***********************
     private List<GoodsCate> children;
-    private Boolean loading;
+    private List<Goods> goodsChildren;
+    //private Boolean loading;
     /** 0、默认；1、提交审核；2、审核通过；3、审核失败；4、停用 */
     private String statusStr;
     /** 级别：1：一级；2：二级；3：三级（可扩展） */
@@ -80,58 +81,45 @@ public class GoodsCate implements Serializable{
     private String label;
     
     
-    public Boolean getLoading() {
-		return loading;
+	public List<Goods> getGoodsChildren() {
+		return goodsChildren;
 	}
-
-	public void setLoading(Boolean loading) {
-		this.loading = loading;
+	public void setGoodsChildren(List<Goods> goodsChildren) {
+		this.goodsChildren = goodsChildren;
 	}
-
-	public Integer getValue() {
-		return value;
-	}
-
-	public void setValue(Integer value) {
-		this.value = value;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getGradeStr() {
-		return gradeStr;
-	}
-
-	public void setGradeStr(String gradeStr) {
-		this.gradeStr = gradeStr;
-	}
-
-	public String getStatusStr() {
-		return statusStr;
-	}
-
-	public void setStatusStr(String statusStr) {
-		this.statusStr = statusStr;
-	}
-
 	public List<GoodsCate> getChildren() {
 		return children;
 	}
-
 	public void setChildren(List<GoodsCate> children) {
 		this.children = children;
 	}
-
+	public Integer getValue() {
+		return value;
+	}
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public String getGradeStr() {
+		return gradeStr;
+	}
+	public void setGradeStr(String gradeStr) {
+		this.gradeStr = gradeStr;
+	}
+	public String getStatusStr() {
+		return statusStr;
+	}
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
 	public void setId(java.lang.Integer id) {
         this.id = id;
     }
-
     public java.lang.Integer getId() {
         return this.id;
     }

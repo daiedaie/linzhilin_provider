@@ -3,7 +3,7 @@
 <mapper namespace="com.lzl.dao.javashop.read.goods.GoodsReadDao">
 
 	<sql id="Base_Column_List" >
-		goods_id,full_name,short_name,detail,bar_code,goods_attribute_id,goods_type_id,status,measure_id,repository_id,provider_id,min_stock,max_stock,batch_manage,begin_date,invalid_date,create_time,modify_time 
+		goods_id,full_name,short_name,price,detail,bar_code,goods_attribute_id,goods_type_id,status,measure_id,repository_id,provider_id,min_stock,max_stock,batch_manage,begin_date,invalid_date,create_time,modify_time 
 	</sql>
 	
 	<select id="get" parameterType="java.util.Map" resultType="com.lzl.bean.javashop.goods.Goods">
@@ -14,6 +14,12 @@
         	limit #{startIndex}, #{endIndex}
         </if>
     </select>
+	
+	<select id="getByGoodsTypeId" parameterType="java.lang.Integer" resultType="com.lzl.bean.javashop.goods.Goods">
+		select <include refid="Base_Column_List"/>
+		from goods
+		where goods_type_id = #{goodsTypeId}
+	</select>
 	
 	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
         select count(*)
@@ -31,6 +37,9 @@
 			</if>
 			<if test="shortName != null and shortName !=''">
 			and short_name = #{shortName}
+			</if>
+			<if test="price != null and price !=''">
+			and price = #{price}
 			</if>
 			<if test="detail != null and detail !=''">
 			and detail = #{detail}

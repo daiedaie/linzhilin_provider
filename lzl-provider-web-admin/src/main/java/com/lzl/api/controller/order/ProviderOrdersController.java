@@ -61,6 +61,13 @@ public class ProviderOrdersController extends BaseController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
     }
 	
+	@ApiOperation(value="供应商订单列表新增", notes="必传： ；选传：")
+	@RequestMapping(method = { RequestMethod.POST })
+	public ResponseEntity<Object> post(HttpServletRequest request,@RequestBody ProviderOrders providerOrders) throws Exception {
+		providerOrdersService.post(providerOrders);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+	
 	@SuppressWarnings("unchecked")
     @RequestMapping(value="/down",method = { RequestMethod.GET })
     public void down(HttpServletRequest request,HttpServletResponse response) throws Exception {

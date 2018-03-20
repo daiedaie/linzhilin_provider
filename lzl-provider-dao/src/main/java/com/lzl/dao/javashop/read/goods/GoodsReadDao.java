@@ -25,5 +25,7 @@ public interface GoodsReadDao {
 	 * @return
 	 */
 	Integer getCount(Map<String, Object> queryMap);
+
+	List<Goods> getByGoodsTypeId(Integer goodsTypeId);
 	
 }

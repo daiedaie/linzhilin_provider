@@ -21,8 +21,11 @@ public class Goods implements Serializable{
 
     /** 简称 */
     private java.lang.String shortName;
+    
+    /** 价格 */
+    private java.lang.Float price;
 
-    /** 规格型号 */
+	/** 规格型号 */
     private java.lang.String detail;
 
     /** 条形码 */
@@ -69,9 +72,25 @@ public class Goods implements Serializable{
 
     /** 最后一次修改时间 */
     private java.util.Date modifyTime;
-
-
-    public void setGoodsId(java.lang.Integer goodsId) {
+    
+    //**************额外属性*****************************
+    private Integer value;
+    private String label;
+    
+    
+    public Integer getValue() {
+		return value;
+	}
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public void setGoodsId(java.lang.Integer goodsId) {
         this.goodsId = goodsId;
     }
 
@@ -95,7 +114,12 @@ public class Goods implements Serializable{
     public void setDetail(java.lang.String detail) {
         this.detail = detail;
     }
-
+    public java.lang.Float getPrice() {
+		return price;
+	}
+	public void setPrice(java.lang.Float price) {
+		this.price = price;
+	}
     public java.lang.String getDetail() {
         return this.detail;
     }

@@ -14,9 +14,11 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.lzl.bean.javashop.goods.Goods;
 import com.lzl.bean.javashop.goods.GoodsCate;
 import com.lzl.common.Pager;
 import com.lzl.dao.javashop.read.goods.GoodsCateReadDao;
+import com.lzl.dao.javashop.read.goods.GoodsReadDao;
 import com.lzl.dao.javashop.write.goods.GoodsCateWriteDao;
 import com.lzl.exception.BusinessException;
 import com.lzl.service.goods.IGoodsCateService;
@@ -36,6 +38,9 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 
 	@Resource
     private GoodsCateReadDao goodsCateReadDao;
+	
+	@Resource
+	private GoodsReadDao goodsReadDao;
 	
 	@Resource
     private DataSourceTransactionManager transactionManager;
@@ -71,28 +76,18 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
     }
     /**无条件获取所有商品分类*/
     @Override
-	public List<GoodsCate> getGoodsCateForAttribute(Map<String, Object> queryMap) {
-    	if(queryMap.get("iviewCascader") != null){
-    		if(Integer.parseInt((String)queryMap.get("pid")) == 0){
-    			List<GoodsCate> parents = goodsCateReadDao.getTopLevel();
-    			for(GoodsCate goodsCate : parents){
-    				goodsCate.setValue(goodsCate.getId());
-    				goodsCate.setLabel(goodsCate.getName());
-    				goodsCate.setChildren(new ArrayList<GoodsCate>());
-    				goodsCate.setLoading(false);
-    			}
-    			return parents;
-    		}else{
-    			List<GoodsCate> children = goodsCateReadDao.getChildren(Integer.parseInt((String)queryMap.get("pid")));
-    			for(GoodsCate goodsCate : children){
-    				goodsCate.setValue(goodsCate.getId());
-    				goodsCate.setLabel(goodsCate.getName());
-    			}
-    			return children;
-    		}
-		}
+	public List<GoodsCate> goodsCateOrGoods(Map<String, Object> queryMap) {
+    	if(queryMap.get("cascaderGoodsCate") != null){
+    		List<GoodsCate> parents = goodsCateReadDao.getTopLevel();
+    		for(GoodsCate goodsCate : parents){
+				goodsCate.setValue(goodsCate.getId());
+				goodsCate.setLabel(goodsCate.getName());
+				this.setGoodsCateChildren(parents, queryMap);
+			}
+    		return parents;
+    	}
     	return null;
-	}
+    }
 	
     /**新增*/
     public Boolean post(GoodsCate goodsCate) throws Exception {
@@ -142,14 +137,18 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 
     private void setGoodsCateChildren(List<GoodsCate> parents, Map<String, Object> queryMap) {
     	for(GoodsCate parent : parents){
-    		queryMap.put("pid", parent.getId());
-    		List<GoodsCate> children = goodsCateReadDao.get(queryMap);
+    		List<GoodsCate> children = goodsCateReadDao.getChildren(parent.getId());
     		this.transferData(children);
+    		if(queryMap.get("cascaderGoods") != null){
+    			if(children !=null && children.size() > 0){
+    				this.setCascaderGoods(children);
+    			}
+    		}
     		parent.setChildren(children);
     	}
 	}
     
-    private List<GoodsCate> getGoodsCateParents(List<GoodsCate> children) {
+	private List<GoodsCate> getGoodsCateParents(List<GoodsCate> children) {
     	//Set集合必须重写equals和hashCode方法
     	Set<GoodsCate> parents = new HashSet<>();
     	for(GoodsCate goodsCate : children){
@@ -172,6 +171,19 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 	@Override
 	public List<GoodsCate> getTopLevel() {
 		return goodsCateReadDao.getTopLevel();
+	}
+	
+	private void setCascaderGoods(List<GoodsCate> children) {
+		for(GoodsCate child : children){
+			List<Goods> goods = goodsReadDao.getByGoodsTypeId(child.getGoodsTypeId());
+			if(goods != null && goods.size() > 0){
+				for(Goods good : goods){
+					good.setValue(good.getGoodsId());
+					good.setLabel(good.getFullName());
+				}
+			}
+			child.setGoodsChildren(goods);
+		}
 	}
 	
 	private void transferData(List<GoodsCate> goodsCates) {

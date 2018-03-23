@@ -21,7 +21,9 @@ public interface GoodsCateReadDao {
 	Integer getCount(Map<String, Object> queryMap);
 	/**获取一级分类*/
 	List<GoodsCate> getTopLevel();
+	List<GoodsCate> getAllChildren();
 	List<GoodsCate> getGoodsCateChildren(Integer id);
 	List<GoodsCate> getChildren(@Param("parentId")Integer parentId);
+	
 
 }

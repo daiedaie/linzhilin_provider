@@ -5,15 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.annotation.Resource;
-
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-
 import com.lzl.bean.javashop.goods.Goods;
 import com.lzl.bean.javashop.goods.GoodsCate;
 import com.lzl.common.Pager;
@@ -77,16 +74,13 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
     /**无条件获取所有商品分类*/
     @Override
 	public List<GoodsCate> goodsCateOrGoods(Map<String, Object> queryMap) {
-    	if(queryMap.get("cascaderGoodsCate") != null){
-    		List<GoodsCate> parents = goodsCateReadDao.getTopLevel();
-    		for(GoodsCate goodsCate : parents){
-				goodsCate.setValue(goodsCate.getId());
-				goodsCate.setLabel(goodsCate.getName());
-				this.setGoodsCateChildren(parents, queryMap);
-			}
-    		return parents;
-    	}
-    	return null;
+    	List<GoodsCate> parents = goodsCateReadDao.getTopLevel();
+    	for(GoodsCate goodsCate : parents){
+			goodsCate.setValue(goodsCate.getId());
+			goodsCate.setLabel(goodsCate.getName());
+			this.setGoodsCateChildren(parents, queryMap);
+		}
+    	return parents;
     }
 	
     /**新增*/
@@ -136,16 +130,22 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 	/*******************上面是公共方法，下面是私有方法********/
 
     private void setGoodsCateChildren(List<GoodsCate> parents, Map<String, Object> queryMap) {
-    	for(GoodsCate parent : parents){
-    		List<GoodsCate> children = goodsCateReadDao.getChildren(parent.getId());
-    		this.transferData(children);
-    		if(queryMap.get("cascaderGoods") != null){
-    			if(children !=null && children.size() > 0){
-    				this.setCascaderGoods(children);
-    			}
-    		}
-    		parent.setChildren(children);
-    	}
+        List<GoodsCate> allChildren = goodsCateReadDao.getAllChildren();
+          for(GoodsCate parent : parents){
+            List<GoodsCate> children = new ArrayList<>();
+            for(GoodsCate child : allChildren){
+              if(parent.getId() == child.getPid()){
+                children.add(child);
+              }
+            }
+            if(children != null && children.size() > 0){
+              this.transferData(allChildren);
+              if(queryMap.get("cascaderGoods") != null){
+                this.setCascaderGoods(children);
+              }
+            }
+            parent.setChildren(children);
+        }
 	}
     
 	private List<GoodsCate> getGoodsCateParents(List<GoodsCate> children) {
@@ -174,15 +174,17 @@ public class GoodsCateServiceImpl implements IGoodsCateService{
 	}
 	
 	private void setCascaderGoods(List<GoodsCate> children) {
+		List<Goods> allGoods = goodsReadDao.get(null);
 		for(GoodsCate child : children){
-			List<Goods> goods = goodsReadDao.getByGoodsTypeId(child.getGoodsTypeId());
-			if(goods != null && goods.size() > 0){
-				for(Goods good : goods){
+			List<Goods> goodsList = new ArrayList<>();
+			for(Goods good : allGoods){
+				if(child.getGoodsTypeId() == good.getGoodsTypeId()){
 					good.setValue(good.getGoodsId());
 					good.setLabel(good.getFullName());
+					goodsList.add(good);
 				}
 			}
-			child.setGoodsChildren(goods);
+			child.setGoodsChildren(goodsList);
 		}
 	}
 	

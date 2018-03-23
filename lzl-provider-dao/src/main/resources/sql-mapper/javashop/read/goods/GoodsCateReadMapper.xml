@@ -31,6 +31,12 @@
 		where pid = 0
 	</select>
 	
+	<select id="getAllChildren" resultType="com.lzl.bean.javashop.goods.GoodsCate">
+		select <include refid="Base_Column_List"/>
+		from goods_cate
+		where pid != 0
+	</select>
+	
 	<select id="getChildren" parameterType="java.lang.Integer" resultType="com.lzl.bean.javashop.goods.GoodsCate">
 		select <include refid="Base_Column_List" />
 		from goods_cate
